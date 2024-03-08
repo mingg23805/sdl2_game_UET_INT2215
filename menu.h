@@ -10,7 +10,6 @@
 #include"SDL_u.h"
 using namespace std;
 void renderButton(SDL_Texture* texture, int x, int y);
-void Make_MenuGame(SDL_Renderer *renderer);
-//void renderMenu();
-//void menu_function();
+void MakeMenuGame(SDL_Renderer *renderer);
+bool QuitMenu(SDL_Renderer *renderer,SDL_Event& e);
 #endif MENU

@@ -46,8 +46,9 @@ SDL_Texture* loadTexture( string path ,SDL_Renderer* renderer)
  if( newTexture == NULL )
  cout << "Unable to create texture from " << path << " SDL Error: "
  << SDL_GetError() << endl;
- SDL_FreeSurface( loadedSurface );
+SDL_FreeSurface( loadedSurface );
  }
+
  return newTexture;
 }
 

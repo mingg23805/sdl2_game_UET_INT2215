@@ -1,20 +1,36 @@
-#include<string>
-#include<iostream>
-#include <SDL.h>
-#include <stdio.h>
+#include<bits/stdc++.h>
 #include<SDL_image.h>
 #include "SDL_u.h"
 #include "menu.h"
+
+
+
 using namespace std;
+
+bool quit = false;
+
 SDL_Window* window;
 SDL_Renderer *renderer;
 int main( int argc, char* args[] )
 {
 
    initSDL(window,renderer);
-   Make_MenuGame(renderer);
-   SDL_Delay(2000);
-   //quitSDL(window,renderer);
+   SDL_Event e;
 
-   return 0;
+    while (!quit) {
+        while (SDL_PollEvent(&e) != 0) {
+            if (e.type == SDL_QUIT) {
+                quit = true;
+            } else if (e.type == SDL_MOUSEBUTTONDOWN) {
+                if (e.button.button == SDL_BUTTON_LEFT) {
+                    quit=QuitMenu(renderer,e);
+                }
+            }
+        }
+
+        MakeMenuGame(renderer);
+    }
+
+    quitSDL(window,renderer);
+    return 0;
 }

@@ -13,4 +13,7 @@ void initSDL(SDL_Window* & window, SDL_Renderer* &renderer);
 void quitSDL(SDL_Window* & window, SDL_Renderer* &renderer);
 SDL_Texture* loadTexture( string path ,SDL_Renderer* renderer);
 
+
+
+
 #endif SDL_U_H
