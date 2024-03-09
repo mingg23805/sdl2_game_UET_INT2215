@@ -2,8 +2,7 @@
 #include<SDL_image.h>
 #include "SDL_u.h"
 #include "menu.h"
-
-
+#include"gameplay.h"
 
 using namespace std;
 
@@ -28,9 +27,10 @@ int main( int argc, char* args[] )
             }
         }
 
-        MakeMenuGame(renderer);
-    }
 
-    quitSDL(window,renderer);
+       renderDemoMap(renderer);
+    }
+       // MakeMenuGame(renderer);
+   quitSDL(window,renderer);
     return 0;
 }

@@ -33,6 +33,7 @@
 		</Compiler>
 		<Unit filename="SDL_u.cpp" />
 		<Unit filename="SDL_u.h" />
+		<Unit filename="gameplay.cpp" />
 		<Unit filename="gameplay.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="menu.cpp" />

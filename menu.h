@@ -12,4 +12,9 @@ using namespace std;
 void renderButton(SDL_Texture* texture, int x, int y);
 void MakeMenuGame(SDL_Renderer *renderer);
 bool QuitMenu(SDL_Renderer *renderer,SDL_Event& e);
+bool ChooseMap(SDL_Renderer* renderer ,SDL_Event& e) ;
+
+
+
+
 #endif MENU

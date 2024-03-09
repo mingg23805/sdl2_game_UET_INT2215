@@ -15,5 +15,4 @@ SDL_Texture* loadTexture( string path ,SDL_Renderer* renderer);
 
 
 
-
 #endif SDL_U_H
