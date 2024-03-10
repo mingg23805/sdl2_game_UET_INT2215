@@ -27,8 +27,9 @@ int main( int argc, char* args[] )
             }
         }
 
+        MakeMenuGame(renderer);
 
-       renderDemoMap(renderer);
+       //renderDemoMap(renderer);
     }
        // MakeMenuGame(renderer);
    quitSDL(window,renderer);
