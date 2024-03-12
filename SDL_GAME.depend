@@ -1,19 +1,16 @@
 # depslib dependency file v1.0
-1710078999 source:d:\sdl_game\main.cpp
+1710255112 source:d:\sdl_game\main.cpp
+	<SDL_image.h>
+	"SDL_u.h"
+	"menu.h"
+	"gameplay.h"
+
+1710255640 d:\sdl_game\sdl_u.h
 	<bits/stdc++.h>
-	<SDL_image.h>
-	"SDL_u.h"
-	"menu.h"
-	"gameplay.h"
-
-1709995201 d:\sdl_game\sdl_u.h
-	<string>
-	<iostream>
 	<SDL.h>
-	<string.h>
 	<SDL_image.h>
 
-1709995201 d:\sdl_game\menu.h
+1710255640 d:\sdl_game\menu.h
 	<string>
 	<iostream>
 	<SDL.h>
@@ -21,16 +18,16 @@
 	<SDL_image.h>
 	"SDL_u.h"
 
-1709995201 source:d:\sdl_game\sdl_u.cpp
+1710163609 source:d:\sdl_game\sdl_u.cpp
 	"SDL_u.h"
 
-1709995201 source:d:\sdl_game\menu.cpp
+1710156944 source:d:\sdl_game\menu.cpp
 	"menu.h"
 
-1710078999 source:d:\sdl_game\gameplay.cpp
+1710255547 source:d:\sdl_game\gameplay.cpp
 	"gameplay.h"
 
-1710059019 d:\sdl_game\gameplay.h
+1710255689 d:\sdl_game\gameplay.h
 	<bits/stdc++.h>
 	"SDL_u.h"
 	<SDL.h>

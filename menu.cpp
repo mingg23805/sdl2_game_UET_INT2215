@@ -7,10 +7,10 @@ void renderButton(SDL_Renderer* renderer, SDL_Texture* texture, int x, int y) {
     }
 void MakeMenuGame( SDL_Renderer *renderer )
 {
-    SDL_Texture* settingsButtonTexture = loadTexture("setting.png",renderer);
-    SDL_Texture* startButtonTexture = loadTexture("start.png",renderer);
-    SDL_Texture* quitButtonTexture = loadTexture("quit.png",renderer);
-    SDL_Texture* background= loadTexture("menu.png",renderer);
+    SDL_Texture* settingsButtonTexture = loadTexture("picture/menugame/setting.png",renderer);
+    SDL_Texture* startButtonTexture = loadTexture("picture/menugame/start.png",renderer);
+    SDL_Texture* quitButtonTexture = loadTexture("picture/menugame/quit.png",renderer);
+    SDL_Texture* background= loadTexture("picture/menugame/menu.png",renderer);
     SDL_RenderCopy(renderer ,background, NULL, NULL);
     renderButton(renderer,settingsButtonTexture, 1920/2-400, 1080/2 +50);
     renderButton(renderer,startButtonTexture, 1920/2-400, 1080/2+ 50 - 200);
