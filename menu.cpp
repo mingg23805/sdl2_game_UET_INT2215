@@ -15,7 +15,6 @@ void MakeMenuGame( SDL_Renderer *renderer )
     renderButton(renderer,settingsButtonTexture, 1920/2-400, 1080/2 +50);
     renderButton(renderer,startButtonTexture, 1920/2-400, 1080/2+ 50 - 200);
     renderButton( renderer,quitButtonTexture, 1920/2-400, 1080/2+ 50 + 200);
-    SDL_RenderPresent(renderer);
     SDL_DestroyTexture(background);
 }
 bool QuitMenu(SDL_Renderer* renderer ,SDL_Event& e)

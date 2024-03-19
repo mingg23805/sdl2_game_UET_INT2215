@@ -54,4 +54,3 @@ SDL_FreeSurface( loadedSurface );
  return newTexture;
 }
 
-
