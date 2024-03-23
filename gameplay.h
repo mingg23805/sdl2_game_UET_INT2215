@@ -11,42 +11,25 @@ public:
     float hp;
     void MakeParameter();
     void loadImg(int SerialNum, SDL_Renderer* renderer,const std:: string& action);
-    void show(SDL_Renderer* renderer,float x_pos,float y_pos,int frames);
+    void show(SDL_Renderer* renderer,float x_pos,float y_pos);
     void RunAction(SDL_Renderer* renderer,std::vector<std::pair<int, int>> EnemyPath);
     void AttackAction(SDL_Renderer* renderer);
     void DeadAction(SDL_Renderer* renderer);
     void EnemyAction(SDL_Renderer* renderer);
 
 private:
-    int x_val;
-    int y_val;
     int x_pos;
     int y_pos;
     int width;
     int height;
     SDL_Rect frame_clip[20];
     int numFrames;
-    int RunCurrentFrame;
-    int DeadCurrentFrame;
-    int AttackCurrentFrame;
+    int CurrentFrame;
     int currentPathIndex;
 };
 
 
-class tower
-{   SDL_Texture* texture;
-    int x; int y;
-    int range;
-    int ad;
-    int speed;
-    int cost;
-   class bullet
-   { double x;
-    double y;
-    SDL_Texture *texture;
-   };
 
-} ;
 class player
 {   int Main_hp;
      double x;double y;
@@ -56,6 +39,8 @@ class player
 class Map
 { public:
     SDL_Texture* texture;
+    int lv;
+
 };
 extern std:: vector <std:: pair<int ,int >>EnemyPath;
 extern std:: vector <std:: pair<int ,int >>TowerLocation;

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1710860893 source:d:\sdl_game\main.cpp
+1711005597 source:d:\sdl_game\main.cpp
 	<SDL_image.h>
 	<bits/stdc++.h>
 	"SDL_u.h"
@@ -25,9 +25,15 @@
 1710673254 source:d:\sdl_game\menu.cpp
 	"menu.h"
 
-1710861156 source:d:\sdl_game\gameplay.cpp
+1711189481 source:d:\sdl_game\gameplay.cpp
 	"gameplay.h"
 
-1710860262 d:\sdl_game\gameplay.h
+1711183950 d:\sdl_game\gameplay.h
 	"SDL_u.h"
+
+1711015531 source:d:\sdl_game\tower.cpp
+	"tower.h"
+
+1711184040 d:\sdl_game\tower.h
+	"gameplay.h"
 
