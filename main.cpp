@@ -2,7 +2,8 @@
 #include<bits/stdc++.h>
 #include "SDL_u.h"
 #include "menu.h"
-#include"gameplay.h"
+#include"enemy.h"
+#include"game.h"
 using namespace std;
 bool quit = false;
 

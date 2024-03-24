@@ -6,11 +6,11 @@ void Tower::TowerParameter(int type,SDL_Renderer * renderer)
     {
     default:
     case archer :
-        {
-            texture= loadTexture("picture/tower/archer_tower.png");
+        {  bullet= loadTexture("picture/tower/arrow.png",renderer);
+            texture= loadTexture("picture/tower/archer_tower.png",renderer);
             range=400;
             damage=20;
-            firerate=1.5 ;
+            fireRate=2 ;
             cost=150;
             rangeToAdd=150;
             damageToAdd=20;
@@ -18,17 +18,15 @@ void Tower::TowerParameter(int type,SDL_Renderer * renderer)
         }
     case rock :
 
-        {
-            texture= loadTexture("picture/tower/archer_tower.png");
+        {   bullet= loadTexture("picture/tower/rock.png",renderer);
+            texture= loadTexture("picture/tower/rock_tower.png",renderer);
             range=250;
             damage=40;
-            firerate=1 ;
+            fireRate=1.25 ;
             cost=175;
             rangeToAdd=100;
             damageToAdd=25;
              }
     }
-
-
 }
 

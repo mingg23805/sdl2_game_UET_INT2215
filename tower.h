@@ -9,19 +9,16 @@ class Tower {
 public:
     Tower();
     ~Tower();
-    int GetType() {return type;}
-    void LoadImg(SDL_Renderer* renderer);
     void Show(SDL_Renderer* renderer, float x, float y);
     void Shoot(SDL_Renderer* renderer, std::vector<Enemy>& Enemy);
-    void TowerParameter(int type );
+    void TowerParameter(int type ,SDL_Renderer* renderer);
       private:
     int type;
-
     int x_pos;
     int y_pos;
     int width;
     int height;
-
+   SDL_Texture * bullet;
     SDL_Texture* texture;
     int lv;
     int range;

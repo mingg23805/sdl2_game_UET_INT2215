@@ -25,15 +25,21 @@
 1710673254 source:d:\sdl_game\menu.cpp
 	"menu.h"
 
-1711189481 source:d:\sdl_game\gameplay.cpp
+1711190419 source:d:\sdl_game\gameplay.cpp
 	"gameplay.h"
 
-1711183950 d:\sdl_game\gameplay.h
-	"SDL_u.h"
+1711259265 d:\sdl_game\gameplay.h
+	"game.h"
 
-1711015531 source:d:\sdl_game\tower.cpp
+1711258199 source:d:\sdl_game\tower.cpp
 	"tower.h"
 
-1711184040 d:\sdl_game\tower.h
+1711258192 d:\sdl_game\tower.h
 	"gameplay.h"
+
+1711259259 d:\sdl_game\game.h
+	"SDL_u.h"
+
+1711259157 source:d:\sdl_game\game.cpp
+	"game.h"
 
