@@ -22,6 +22,7 @@ extern std:: vector <std:: pair<int ,int >>TowerLocation;
 void renderPicture(SDL_Renderer* renderer, SDL_Texture* texture, int x, int y) ;
 void makePathandLocation();
 void renderDemoMap(SDL_Renderer* renderer);
+void chooseTower(SDL_Event&e,int &chooseTower,SDL_Renderer* renderer);
 
 
 #endif //game

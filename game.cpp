@@ -85,3 +85,29 @@ std:: vector <std:: pair<int ,int >>TowerLocation;
 
 
  }
+ void chooseTower(SDL_Event&e,int &choosetower,SDL_Renderer *renderer)
+ {  SDL_Texture * selector=loadTexture("picture/map/selector.png",renderer);
+    SDL_Rect selectorRect;
+
+     int mouseX = e.button.x;
+    int mouseY = e.button.y;
+  if (mouseX >= 1920-240 && mouseX <= 1920  &&
+        mouseY >= 1080 -180   && mouseY <= 1080 )
+
+
+       choosetower=1;
+ if (mouseX >= 1920-240*2 && mouseX < 1920-240  &&
+        mouseY >= 1080 -180   && mouseY <= 1080 )
+        choosetower=2;
+     if(choosetower==1)
+     {
+         selectorRect={1920-240,1080-300,240,180};
+         SDL_RenderCopy(renderer,selector,NULL,&selectorRect);
+     }
+    if(choosetower==2)
+     {
+         selectorRect={1920-240*2,1080-300,240,180};
+         SDL_RenderCopy(renderer,selector,NULL,&selectorRect);
+     }
+
+}

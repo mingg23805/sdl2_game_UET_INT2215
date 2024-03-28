@@ -43,3 +43,48 @@
 1711259157 source:d:\sdl_game\game.cpp
 	"game.h"
 
+1711615041 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\enemy.cpp
+	"enemy.h"
+
+1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\enemy.h
+	"game.h"
+
+1711615992 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
+	"SDL_u.h"
+
+1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\sdl_u.h
+	<bits/stdc++.h>
+	<SDL.h>
+	<SDL_image.h>
+
+1711618217 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
+	"game.h"
+
+1711618127 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
+	<SDL_image.h>
+	<bits/stdc++.h>
+	"SDL_u.h"
+	"menu.h"
+	"enemy.h"
+	"game.h"
+
+1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\menu.h
+	<string>
+	<iostream>
+	<SDL.h>
+	<string.h>
+	<SDL_image.h>
+	"SDL_u.h"
+
+1711615041 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\menu.cpp
+	"menu.h"
+
+1711615041 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\sdl_u.cpp
+	"SDL_u.h"
+
+1711615041 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\tower.cpp
+	"tower.h"
+
+1711616862 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\tower.h
+	"game.h"
+

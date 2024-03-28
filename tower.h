@@ -1,6 +1,6 @@
 #ifndef tower
 #define tower
-#include"gameplay.h"
+#include"game.h"
 enum TowerType {
     archer = 1,
     rock = 2
@@ -10,7 +10,7 @@ public:
     Tower();
     ~Tower();
     void Show(SDL_Renderer* renderer, float x, float y);
-    void Shoot(SDL_Renderer* renderer, std::vector<Enemy>& Enemy);
+   // void Shoot(SDL_Renderer* renderer, std::vector<Enemy>& Enemy);
     void TowerParameter(int type ,SDL_Renderer* renderer);
       private:
     int type;
