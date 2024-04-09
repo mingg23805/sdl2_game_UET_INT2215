@@ -143,11 +143,9 @@ void Game::draw(SDL_Renderer* renderer) {
     SDL_RenderClear(renderer);
 
 
-    //Draw everything here.
-    //Draw the level.
+
     level.draw(renderer, tileSize);
 
-    //Draw the enemy units.
     for (auto& unitSelected : listUnits)
         unitSelected.draw(renderer, tileSize);
 
@@ -159,7 +157,6 @@ void Game::draw(SDL_Renderer* renderer) {
         SDL_RenderCopy(renderer, textureOverlay, NULL, &rect);
     }
 
-    //Send the image to the window.
     SDL_RenderPresent(renderer);
 }
 

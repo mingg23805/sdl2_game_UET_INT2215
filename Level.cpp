@@ -7,7 +7,7 @@ Level::Level(SDL_Renderer* renderer, int setTileCountX, int setTileCountY) :
     targetX(setTileCountX / 2), targetY(setTileCountY / 2) {
     textureTileWall = TextureLoader::loadTexture(renderer, "Tile Wall.bmp");
     textureTileTarget = TextureLoader::loadTexture(renderer, "Tile Target.bmp");
-
+    textureTileSpawner=TextureLoader::loadTexture(renderer,"Tile Spawner.bmp");
     textureTileEmpty = TextureLoader::loadTexture(renderer, "Tile Empty.bmp");
     textureTileArrowUp = TextureLoader::loadTexture(renderer, "Tile Arrow Up.bmp");
     textureTileArrowUpRight = TextureLoader::loadTexture(renderer, "Tile Arrow Up Right.bmp");
@@ -30,6 +30,15 @@ void Level::draw(SDL_Renderer* renderer, int tileSize) {
     for (int count = 0; count < listTiles.size(); count++)
         drawTile(renderer, (count % tileCountX), (count / tileCountY), tileSize);
 
+   for (int y = 0; y < tileCountY; y++) {
+        for (int x = 0; x < tileCountX; x++) {
+            if (isTileWall(x, y)) {
+                SDL_Rect rect = { x * tileSize, y * tileSize, tileSize, tileSize };
+                SDL_RenderCopy(renderer, textureTileSpawner, NULL, &rect);
+            }
+
+        }
+    }
 
     if (textureTileTarget != nullptr) {
         SDL_Rect rect = { targetX * tileSize, targetY * tileSize, tileSize, tileSize };
@@ -42,6 +51,7 @@ void Level::draw(SDL_Renderer* renderer, int tileSize) {
                 SDL_Rect rect = { x * tileSize, y * tileSize, tileSize, tileSize };
                 SDL_RenderCopy(renderer, textureTileWall, NULL, &rect);
             }
+
         }
     }
 }
@@ -87,29 +97,41 @@ void Level::drawTile(SDL_Renderer* renderer, int x, int y, int tileSize) {
 
 
 bool Level::isTileWall(int x, int y) {
-    int index = x + y * tileCountX;
-    if (index > -1 && index < listTiles.size() &&
-        x > -1 && x < tileCountX &&
-        y > -1 && y < tileCountY)
-        return listTiles[index].type==Type::wall;
-
-    return false;
+  return getTileType(x,y)==Type::wall;
 }
 
 
 void Level::setTileWall(int x, int y, bool setWall) {
-    int index = x + y * tileCountX;
-    if (index > -1 && index < listTiles.size() &&
-        x > -1 && x < tileCountX &&
-        y > -1 && y < tileCountY) {
-       if(setWall==true) listTiles[index].type = Type:: wall;
-        else listTiles[index].type= Type :: block;
-        calculateFlowField();
+    if(getTileType(x,y)!=Type::spawner)
+    {
+        if(setWall==true)
+            setTileType(x,y,Type::wall);
+        else
+            setTileType(x,y,Type::block);
     }
+
 }
 
+Level::Type Level::getTileType(int x ,int y)
+{
+   int index= x+y*tileCountX;
+   if(index>-1 && index<listTiles.size()
+      && x>-1 && x<tileCountX
+      && y>-1 && y<tileCountY)
+        return listTiles[index].type;
+   else return Type :: empty;
 
+};
+void Level::setTileType(int x,int y,Type TileType)
+{
+    int index= x+y*tileCountX;
+   if(index>-1 && index<listTiles.size()
+      && x>-1 && x<tileCountX
+      && y>-1 && y<tileCountY)
+        listTiles[index].type= TileType;
+   calculateFlowField();
 
+}
 Vector2D Level::getTargetPos() {
     return Vector2D( (float)targetX+ 0.5f, (float)targetY + 0.5f);
 }
@@ -155,7 +177,7 @@ void Level::calculateDistances() {
             if (indexNeighbor > -1 && indexNeighbor < listTiles.size() &&
                 neighborX > -1 && neighborX < tileCountX &&
                 neighborY > -1 && neighborY < tileCountY &&
-                listTiles[indexNeighbor].isWall == false) {
+                listTiles[indexNeighbor].type != Type::wall) {
 
                 if (listTiles[indexNeighbor].flowDistance == flowDistanceMax) {
 

@@ -11,7 +11,6 @@ SDL_Texture* TextureLoader::loadTexture(SDL_Renderer* renderer, std::string file
         auto found = umapTexturesLoaded.find(filename);
 
         if (found != umapTexturesLoaded.end()) {
-            //The texture was already loaded so return it.
             return found->second;
         }
         else {
@@ -45,7 +44,6 @@ SDL_Texture* TextureLoader::loadTexture(SDL_Renderer* renderer, std::string file
 
 
 void TextureLoader::deallocateTextures() {
-    //Destroy all the textures
     while (umapTexturesLoaded.empty() == false) {
         auto it = umapTexturesLoaded.begin();
         if (it->second != nullptr)

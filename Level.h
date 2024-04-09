@@ -36,6 +36,8 @@ public:
 	void setTileWall(int x, int y, bool setWall);
 	Vector2D getTargetPos();
 	Vector2D getFlowNormal(int x, int y);
+	Type getTileType(int x, int y);
+	void setTileType(int x,int y,Type TileType);
 
 
 private:
@@ -51,6 +53,7 @@ private:
 	const int targetX = 0, targetY = 0;
 
 	SDL_Texture* textureTileWall = nullptr,
+
 		*textureTileTarget = nullptr,
 		*textureTileEmpty = nullptr,
 		*textureTileArrowUp = nullptr,
@@ -60,5 +63,6 @@ private:
 		*textureTileArrowDown = nullptr,
 		*textureTileArrowDownLeft = nullptr,
 		*textureTileArrowLeft = nullptr,
-		*textureTileArrowUpLeft = nullptr;
+		*textureTileArrowUpLeft = nullptr,
+		*textureTileSpawner = nullptr;
 };
