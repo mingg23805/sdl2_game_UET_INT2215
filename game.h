@@ -1,28 +1,41 @@
-#ifndef game
-#define game
+#pragma once
+#include <vector>
+#include <chrono>
+#include <memory>
+#include <SDL.h>
+#include "Unit.h"
+#include "Level.h"
 
-#include"SDL_u.h"
 
 
+class Game
+{
+private:
+	enum class PlacementMode {
+		wall,
+		units
+	} placementModeCurrent;
 
-class player
-{   int Main_hp;
-     double x;double y;
-    int money;
 
+public:
+	Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight);
+	~Game();
+
+
+private:
+	void processEvents(SDL_Renderer* renderer, bool& running);
+	void update(float dT);
+	void draw(SDL_Renderer* renderer);
+	void addUnit(SDL_Renderer* renderer, Vector2D posMouse);
+	void removeUnitsAtMousePosition(Vector2D posMouse);
+
+	int mouseDownStatus = 0;
+
+	const int tileSize = 48;
+	Level level;
+
+	std::vector<Unit> listUnits;
+
+	SDL_Texture* textureOverlay = nullptr;
+	bool overlayVisible = true;
 };
-class Map
-{ public:
-    SDL_Texture* texture;
-    int lv;
-
-};
-extern std:: vector <std:: pair<int ,int >>EnemyPath;
-extern std:: vector <std:: pair<int ,int >>TowerLocation;
-void renderPicture(SDL_Renderer* renderer, SDL_Texture* texture, int x, int y) ;
-void makePathandLocation();
-void renderDemoMap(SDL_Renderer* renderer);
-void chooseTower(SDL_Event&e,int &chooseTower,SDL_Renderer* renderer);
-
-
-#endif //game

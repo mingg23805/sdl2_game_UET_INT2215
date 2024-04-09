@@ -1,113 +1,182 @@
-#include"game.h"
-
-
-Map demomap;
-std:: vector <std:: pair<int ,int >>EnemyPath;
-std:: vector <std:: pair<int ,int >>TowerLocation;
- void makePathandLocation()
- {
-      for(int i=0;i<=480/120;i++)
-   EnemyPath.push_back(std::make_pair( 120*i , 600+60 )) ;
-
-   EnemyPath.push_back(std::make_pair(  480, 120*4+60 ) );
-   EnemyPath.push_back(std::make_pair( 480 , 120*3+30 ) );
-   EnemyPath.push_back(std::make_pair( 600 +90 , 120*3+30 ) );
-   EnemyPath.push_back(std::make_pair( 600+90 , 120*2+60 ) );
-   EnemyPath.push_back(std::make_pair( 600+90 , 120+30 ) );
-
-   for(int i=6;i<=1700/120;i++)
- EnemyPath.push_back(std::make_pair( 120*i+60, 120+30 ) );
-
-
- TowerLocation.push_back(std::make_pair( 300 , 500 )) ;
- TowerLocation.push_back(std::make_pair( 300 , 820 )) ;
- TowerLocation.push_back(std::make_pair( 820 , 360 )) ;
- TowerLocation.push_back(std::make_pair( 500 , 250 )) ;
- TowerLocation.push_back(std::make_pair( 1200 , 340 )) ;
- TowerLocation.push_back(std::make_pair( 1520 , 340 )) ;
-
- TowerLocation.push_back(std::make_pair( 1360 , 20 )) ;
-
- }
- void renderDemoMap(SDL_Renderer* renderer)
-{  //map
-    demomap.texture= loadTexture("picture/map/map.png", renderer);
-    SDL_RenderCopy(renderer ,demomap.texture, NULL, NULL);
-
-    //castle
-    SDL_Texture * MainTowerTexture= loadTexture("picture/map/castle.png ",renderer);
-    SDL_Rect destinationRect = { 1720, 20, 300, 280 };
-    SDL_RenderCopy(renderer, MainTowerTexture, NULL, &destinationRect);
-
- SDL_DestroyTexture(MainTowerTexture);
-    SDL_DestroyTexture(demomap.texture);
-    // tower Location
-
-   for(auto x : TowerLocation)
-   {
-       SDL_Rect rect = {x.first,x.second , 120, 120};
-       SDL_Texture * slot = loadTexture("picture/map/slot.png", renderer);
-       SDL_RenderCopy(renderer,slot,NULL, &rect);
-       SDL_DestroyTexture(slot);
-   }
+#include "Game.h"
 
 
 
+Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight) :
+    placementModeCurrent(PlacementMode::wall),
+    level(renderer, windowWidth / tileSize, windowHeight / tileSize) {
+
+    //Run the game.
+    if (window != nullptr && renderer != nullptr) {
+        //Load the overlay texture.
+        textureOverlay = TextureLoader::loadTexture(renderer, "Overlay.bmp");
+
+        //Store the current times for the clock.
+        auto time1 = std::chrono::system_clock::now();
+        auto time2 = std::chrono::system_clock::now();
+
+        const float dT = 1.0f / 60.0f;
 
 
-    //button ui hpbar
-    SDL_Texture * TowerButton= loadTexture("picture/map/towerbutton.png",renderer);
-    SDL_Texture * Archer = loadTexture("picture/tower/archer_tower_button.png",renderer);
-    SDL_Texture * Rock = loadTexture("picture/tower/rock_tower_button.png",renderer);
+        bool running = true;
+        while (running) {
+            time2 = std::chrono::system_clock::now();
+            std::chrono::duration<float> timeDelta = time2 - time1;
+            float timeDeltaFloat = timeDelta.count();
 
-    SDL_Rect ArcherRect= {1920-240,1080-180,240,180};
-    SDL_Rect RockRect = { 1920-240*2,1080-180,240,180};
+            if (timeDeltaFloat >= dT) {
+                time1 = time2;
+
+                processEvents(renderer, running);
+                update(dT);
+                draw(renderer);
+            }
+        }
+    }
+}
 
 
-
-    SDL_RenderCopy(renderer,TowerButton,NULL,&ArcherRect);
-    SDL_RenderCopy(renderer,Archer,NULL,&ArcherRect);
-
-    SDL_RenderCopy(renderer,TowerButton,NULL,&RockRect);
-    SDL_RenderCopy(renderer,Rock,NULL,&RockRect);
-
-
-    SDL_DestroyTexture(TowerButton);
-    SDL_DestroyTexture(Archer);
-    SDL_DestroyTexture(Rock);
-
-    SDL_Texture * Status = loadTexture("picture/map/Status.png",renderer);
-
-    SDL_Rect StatusRect={0,0,360,480};
-    SDL_RenderCopy(renderer,Status,NULL,&StatusRect);
-    SDL_DestroyTexture(Status);
+Game::~Game() {
+    TextureLoader::deallocateTextures();
+}
 
 
 
- }
- void chooseTower(SDL_Event&e,int &choosetower,SDL_Renderer *renderer)
- {  SDL_Texture * selector=loadTexture("picture/map/selector.png",renderer);
-    SDL_Rect selectorRect;
+void Game::processEvents(SDL_Renderer* renderer, bool& running) {
+    bool mouseDownThisFrame = false;
+    SDL_Event event;
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+        case SDL_QUIT:
+            running = false;
+            break;
 
-     int mouseX = e.button.x;
-    int mouseY = e.button.y;
-  if (mouseX >= 1920-240 && mouseX <= 1920  &&
-        mouseY >= 1080 -180   && mouseY <= 1080 )
+        case SDL_MOUSEBUTTONDOWN:
+            mouseDownThisFrame = (mouseDownStatus == 0);
+            if (event.button.button == SDL_BUTTON_LEFT)
+                mouseDownStatus = SDL_BUTTON_LEFT;
+            else if (event.button.button == SDL_BUTTON_RIGHT)
+                mouseDownStatus = SDL_BUTTON_RIGHT;
+            break;
+        case SDL_MOUSEBUTTONUP:
+            mouseDownStatus = 0;
+            break;
+
+        case SDL_KEYDOWN:
+            switch (event.key.keysym.scancode) {
+                //Quit the game.
+            case SDL_SCANCODE_ESCAPE:
+                running = false;
+                break;
+
+                //Set the current gamemode.
+            case SDL_SCANCODE_1:
+                placementModeCurrent = PlacementMode::wall;
+                break;
+            case SDL_SCANCODE_2:
+                placementModeCurrent = PlacementMode::units;
+                break;
+
+                //Show/hide the overlay
+            case SDL_SCANCODE_H:
+                overlayVisible = !overlayVisible;
+                break;
+            }
+        }
+    }
 
 
-       choosetower=1;
- if (mouseX >= 1920-240*2 && mouseX < 1920-240  &&
-        mouseY >= 1080 -180   && mouseY <= 1080 )
-        choosetower=2;
-     if(choosetower==1)
-     {
-         selectorRect={1920-240,1080-300,240,180};
-         SDL_RenderCopy(renderer,selector,NULL,&selectorRect);
-     }
-    if(choosetower==2)
-     {
-         selectorRect={1920-240*2,1080-300,240,180};
-         SDL_RenderCopy(renderer,selector,NULL,&selectorRect);
-     }
+    //Process input from the mouse cursor.
+    int mouseX = 0, mouseY = 0;
+    SDL_GetMouseState(&mouseX, &mouseY);
+    //Convert from the window's coordinate system to the game's coordinate system.
+    Vector2D posMouse((float)mouseX / tileSize, (float)mouseY / tileSize);
 
+    if (mouseDownStatus > 0) {
+        switch (mouseDownStatus) {
+        case SDL_BUTTON_LEFT:
+            switch (placementModeCurrent) {
+            case PlacementMode::wall:
+                //Add wall at the mouse position.
+                level.setTileWall((int)posMouse.x, (int)posMouse.y, true);
+                break;
+            case PlacementMode::units:
+                //Add the selected unit at the mouse position.
+                if (mouseDownThisFrame)
+                    addUnit(renderer, posMouse);
+                break;
+            }
+            break;
+
+
+        case SDL_BUTTON_RIGHT:
+            //Remove wall at the mouse position.
+            level.setTileWall((int)posMouse.x, (int)posMouse.y, false);
+            //Remove units at the mouse position.
+            removeUnitsAtMousePosition(posMouse);
+            break;
+        }
+    }
+}
+
+
+
+void Game::update(float dT) {
+    //Update the units.
+    for (auto it = listUnits.begin() ;it!=listUnits.end();)
+    {
+        (*it).update(dT,level,listUnits);
+        if((*it).checkALive()==false)
+            it=listUnits.erase(it);
+        else
+        it++;
+    }
+}
+
+
+
+void Game::draw(SDL_Renderer* renderer) {
+    //Draw.
+    //Set the draw color to white.
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    //Clear the screen.
+    SDL_RenderClear(renderer);
+
+
+    //Draw everything here.
+    //Draw the level.
+    level.draw(renderer, tileSize);
+
+    //Draw the enemy units.
+    for (auto& unitSelected : listUnits)
+        unitSelected.draw(renderer, tileSize);
+
+    //Draw the overlay.
+    if (textureOverlay != nullptr && overlayVisible) {
+        int w = 0, h = 0;
+        SDL_QueryTexture(textureOverlay, NULL, NULL, &w, &h);
+        SDL_Rect rect = { 40, 40, w, h };
+        SDL_RenderCopy(renderer, textureOverlay, NULL, &rect);
+    }
+
+    //Send the image to the window.
+    SDL_RenderPresent(renderer);
+}
+
+
+
+void Game::addUnit(SDL_Renderer* renderer, Vector2D posMouse) {
+    listUnits.push_back(Unit(renderer, posMouse));
+}
+
+
+
+void Game::removeUnitsAtMousePosition(Vector2D posMouse) {
+    for (int count = 0; count < listUnits.size(); count++) {
+        auto& unitSelected = listUnits[count];
+        if (unitSelected.checkOverlap(posMouse, 0.0f)) {
+            listUnits.erase(listUnits.begin() + count);
+            count--;
+        }
+    }
 }

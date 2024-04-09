@@ -1,41 +1,60 @@
-#include<SDL_image.h>
-#include<bits/stdc++.h>
-#include "SDL_u.h"
-#include "menu.h"
-#include"enemy.h"
-#include"game.h"
-using namespace std;
-bool quit = false;
-Enemy enm;
-Tower t;
-int choosetower=0;
-int main( int argc, char* args[] )
-{    enm.SerialNum=1;
-     enm.MakeParameter();
-     t.TowerParameter(1,renderer);
-     t.TowerParameter(2,renderer);
+#include <iostream>
+#include <SDL.h>
+#include "Game.h"
 
 
 
-    initSDL(window,renderer);
-   SDL_Event e;
-   makePathandLocation();
 
-    while (!quit)
-        {
-        renderDemoMap(renderer);
-        enm.RunAction(renderer,EnemyPath);
-     while (SDL_PollEvent(&e) != 0) {
-            if (e.type == SDL_QUIT) {
-                quit = true;}
-                 if (e.type == SDL_MOUSEBUTTONDOWN) {
-                if (e.button.button == SDL_BUTTON_LEFT)
-                chooseTower(e,choosetower,renderer);}
+int main(int argc, char* args[]) {
 
-        }
-        SDL_RenderPresent(renderer);
+	srand(time(NULL));
 
-    }
-   quitSDL(window,renderer);
-    return 0;
+	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+		std::cout << "Error: Couldn't initialize SDL Video = " << SDL_GetError() << std::endl;
+		return 1;
+	}
+	else {
+		//Create the window.
+		SDL_Window* window = SDL_CreateWindow("Tower Base Defense",
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 720, 720, 0);
+		if (window == nullptr) {
+			std::cout << "Error: Couldn't create window = " << SDL_GetError() << std::endl;
+			return 1;
+		}
+		else {
+			//Create a renderer for GPU accelerated drawing.
+			SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED |
+				SDL_RENDERER_PRESENTVSYNC);
+			if (renderer == nullptr) {
+				std::cout << "Error: Couldn't create renderer = " << SDL_GetError() << std::endl;
+				return 1;
+			}
+			else {
+				//Ensure transparent graphics are drawn correctly.
+				SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
+				//Output the name of the render driver.
+				SDL_RendererInfo rendererInfo;
+				SDL_GetRendererInfo(renderer, &rendererInfo);
+				std::cout << "Renderer = " << rendererInfo.name << std::endl;
+
+				//Get the dimensions of the window.
+				int windowWidth = 0, windowHeight = 0;
+				SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+
+				//Start the game.
+				Game game(window, renderer, windowWidth, windowHeight);
+
+				//Clean up.
+				SDL_DestroyRenderer(renderer);
+			}
+
+			//Clean up.
+			SDL_DestroyWindow(window);
+		}
+
+		//Clean up.
+		SDL_Quit();
+	}
+	return 0;
 }
