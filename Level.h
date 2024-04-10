@@ -31,14 +31,13 @@ private:
 public:
 	Level(SDL_Renderer* renderer, int setTileCountX, int setTileCountY);
 	void draw(SDL_Renderer* renderer, int tileSize);
-
 	bool isTileWall(int x, int y);
 	void setTileWall(int x, int y, bool setWall);
 	Vector2D getTargetPos();
 	Vector2D getFlowNormal(int x, int y);
 	Type getTileType(int x, int y);
 	void setTileType(int x,int y,Type TileType);
-
+	Vector2D getRanSpawnerLocation();
 
 private:
 	void drawTile(SDL_Renderer* renderer, int x, int y, int tileSize);

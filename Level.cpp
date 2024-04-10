@@ -101,7 +101,21 @@ void Level::drawTile(SDL_Renderer* renderer, int x, int y, int tileSize) {
 }
 
 
-
+Vector2D Level ::getRanSpawnerLocation()
+{
+    std::vector<int>listSpawner;
+    for(int i=0;i<listTiles.size();i++)
+    {
+        auto& tileSelected =listTiles[i];
+        if(tileSelected.type==Type::spawner)
+            listSpawner.push_back(i);
+    }
+    if(listSpawner.empty()==false)
+    {
+        int index= listSpawner[rand()%  listSpawner.size() ];
+        return Vector2D( index% tileCountX +0.5 ,index/tileCountX +0.5 );
+    }
+}
 bool Level::isTileWall(int x, int y) {
   return getTileType(x,y)==Type::wall;
 }

@@ -42,6 +42,8 @@
 		<Unit filename="Vector2D.cpp" />
 		<Unit filename="Vector2D.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="timer.cpp" />
+		<Unit filename="timer.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

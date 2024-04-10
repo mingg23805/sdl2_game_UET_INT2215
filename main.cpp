@@ -35,8 +35,9 @@ int main(int argc, char* args[]) {
 
 
 
-                 int windowWidth = 0, windowHeight = 0;
-				SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+                 int windowWidth = 720
+                 , windowHeight = 720;
+
 
 				Game game(window, renderer, windowWidth, windowHeight);
 

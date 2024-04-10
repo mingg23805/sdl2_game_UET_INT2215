@@ -5,7 +5,7 @@
 #include <SDL.h>
 #include "Unit.h"
 #include "Level.h"
-
+#include"timer.h"
 
 
 class Game
@@ -24,10 +24,12 @@ public:
 
 private:
 	void processEvents(SDL_Renderer* renderer, bool& running);
-	void update(float dT);
+	void update(float dT,SDL_Renderer *renderer);
 	void draw(SDL_Renderer* renderer);
+	void updateSpawnUnits(SDL_Renderer *renderer ,float dT);
 	void addUnit(SDL_Renderer* renderer, Vector2D posMouse);
 	void removeUnitsAtMousePosition(Vector2D posMouse);
+
 
 	int mouseDownStatus = 0;
 
@@ -35,7 +37,9 @@ private:
 	Level level;
 
 	std::vector<Unit> listUnits;
+    Timer spawnT ,roundT;
 
+    int unitCount=0;
 	SDL_Texture* textureOverlay = nullptr;
 	bool overlayVisible = true;
 };

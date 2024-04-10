@@ -4,7 +4,9 @@
 
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight) :
     placementModeCurrent(PlacementMode::wall),
-    level(renderer, windowWidth / tileSize, windowHeight / tileSize) {
+    level(renderer, windowWidth / tileSize, windowHeight / tileSize) ,
+    spawnT(0.25),roundT(5.0)
+    {
 
     if (window != nullptr && renderer != nullptr) {
 
@@ -26,7 +28,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
                 time1 = time2;
 
                 processEvents(renderer, running);
-                update(dT);
+                update(dT,renderer);
                 draw(renderer);
             }
         }
@@ -118,7 +120,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
 
 
 
-void Game::update(float dT) {
+void Game::update(float dT,SDL_Renderer *renderer) {
 
     for (auto it = listUnits.begin() ;it!=listUnits.end();)
     {
@@ -128,8 +130,27 @@ void Game::update(float dT) {
         else
         it++;
     }
+      updateSpawnUnits(renderer,dT);
 }
+void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
+{
+   spawnT.countDown(dT);
+   if(listUnits.empty() && unitCount==0)
+   {   roundT.countDown(dT);
 
+       if(roundT.timeSIsZero()==true)
+     {
+       unitCount==15;
+       roundT.resetToMax();
+     }
+   }
+   if(unitCount>0 && spawnT.timeSIsZero())
+   {
+       addUnit(renderer,level.getRanSpawnerLocation());
+               unitCount--;
+               spawnT.resetToMax();
+   }
+}
 
 
 void Game::draw(SDL_Renderer* renderer) {
@@ -173,3 +194,4 @@ void Game::removeUnitsAtMousePosition(Vector2D posMouse) {
         }
     }
 }
+

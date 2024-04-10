@@ -49,23 +49,24 @@
 1712588547 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\enemy.h
 	"game.h"
 
-1712648296 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
+1712767534 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
 	<vector>
 	<chrono>
 	<memory>
 	<SDL.h>
 	"Unit.h"
 	"Level.h"
+	"timer.h"
 
 1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\sdl_u.h
 	<bits/stdc++.h>
 	<SDL.h>
 	<SDL_image.h>
 
-1712721156 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
+1712768179 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
 	"Game.h"
 
-1712649213 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
+1712768289 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
 	<iostream>
 	<SDL.h>
 	"Game.h"
@@ -114,7 +115,7 @@
 1678099102 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\vector2d.h
 	<cmath>
 
-1712669629 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.h
+1712759000 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.h
 	<queue>
 	<vector>
 	<string>
@@ -137,6 +138,12 @@
 	"Unit.h"
 	"Game.h"
 
-1712722251 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.cpp
+1712768446 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.cpp
 	"Level.h"
+
+1712768224 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\timer.h
+	<bits/stdc++.h>
+
+1712767865 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\timer.cpp
+	"timer.h"
 
