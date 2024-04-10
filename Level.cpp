@@ -21,6 +21,12 @@ Level::Level(SDL_Renderer* renderer, int setTileCountX, int setTileCountY) :
     size_t listTilesSize = (size_t)tileCountX * tileCountY;
     listTiles.assign(listTilesSize, Tile{});
 
+    setTileType(tileCountX-1,0,Type::spawner);
+    setTileType(0,0,Type::spawner);
+    setTileType(0,tileCountY-1,Type::spawner);
+    setTileType(tileCountX-1,tileCountY-1,Type::spawner);
+
+
     calculateFlowField();
 }
 
@@ -32,7 +38,7 @@ void Level::draw(SDL_Renderer* renderer, int tileSize) {
 
    for (int y = 0; y < tileCountY; y++) {
         for (int x = 0; x < tileCountX; x++) {
-            if (isTileWall(x, y)) {
+            if (getTileType(x,y)== Type::spawner) {
                 SDL_Rect rect = { x * tileSize, y * tileSize, tileSize, tileSize };
                 SDL_RenderCopy(renderer, textureTileSpawner, NULL, &rect);
             }
@@ -47,7 +53,7 @@ void Level::draw(SDL_Renderer* renderer, int tileSize) {
 
     for (int y = 0; y < tileCountY; y++) {
         for (int x = 0; x < tileCountX; x++) {
-            if (isTileWall(x, y)) {
+            if (getTileType(x,y)==Type::wall) {
                 SDL_Rect rect = { x * tileSize, y * tileSize, tileSize, tileSize };
                 SDL_RenderCopy(renderer, textureTileWall, NULL, &rect);
             }
@@ -119,7 +125,7 @@ Level::Type Level::getTileType(int x ,int y)
       && x>-1 && x<tileCountX
       && y>-1 && y<tileCountY)
         return listTiles[index].type;
-   else return Type :: empty;
+
 
 };
 void Level::setTileType(int x,int y,Type TileType)

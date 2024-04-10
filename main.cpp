@@ -22,7 +22,7 @@ int main(int argc, char* args[]) {
 			return 1;
 		}
 		else {
-			//Create a renderer for GPU accelerated drawing.
+
 			SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED |
 				SDL_RENDERER_PRESENTVSYNC);
 			if (renderer == nullptr) {
@@ -30,30 +30,25 @@ int main(int argc, char* args[]) {
 				return 1;
 			}
 			else {
-				//Ensure transparent graphics are drawn correctly.
+
 				SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
-				//Output the name of the render driver.
-				SDL_RendererInfo rendererInfo;
-				SDL_GetRendererInfo(renderer, &rendererInfo);
-				std::cout << "Renderer = " << rendererInfo.name << std::endl;
 
-				//Get the dimensions of the window.
-				int windowWidth = 0, windowHeight = 0;
+
+                 int windowWidth = 0, windowHeight = 0;
 				SDL_GetWindowSize(window, &windowWidth, &windowHeight);
 
-				//Start the game.
 				Game game(window, renderer, windowWidth, windowHeight);
 
-				//Clean up.
+
 				SDL_DestroyRenderer(renderer);
 			}
 
-			//Clean up.
+
 			SDL_DestroyWindow(window);
 		}
 
-		//Clean up.
+
 		SDL_Quit();
 	}
 	return 0;
