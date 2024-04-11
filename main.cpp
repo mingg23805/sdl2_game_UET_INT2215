@@ -14,9 +14,9 @@ int main(int argc, char* args[]) {
 		return 1;
 	}
 	else {
-		//Create the window.
+
 		SDL_Window* window = SDL_CreateWindow("Tower Base Defense",
-			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 720, 720, 0);
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,1200, 720, 0);
 		if (window == nullptr) {
 			std::cout << "Error: Couldn't create window = " << SDL_GetError() << std::endl;
 			return 1;
@@ -35,11 +35,12 @@ int main(int argc, char* args[]) {
 
 
 
-                 int windowWidth = 720
-                 , windowHeight = 720;
+                 int playWindowWidth = 1200
+
+                 , playWindowHeight = 720;
 
 
-				Game game(window, renderer, windowWidth, windowHeight);
+				Game game(window, renderer, playWindowWidth, playWindowHeight);
 
 
 				SDL_DestroyRenderer(renderer);

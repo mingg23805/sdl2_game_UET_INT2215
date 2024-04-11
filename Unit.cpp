@@ -2,8 +2,8 @@
 #include "Game.h"
 
 
-const float Unit::speed = 5.0f;
-const float Unit::size = 0.4f;
+const float Unit::speed = 1.5f;
+const float Unit::size = 0.48f;
 
 
 
@@ -69,11 +69,14 @@ void Unit::update(float dT, Level& level, std::vector<Unit>& listUnits) {
 
 void Unit::draw(SDL_Renderer* renderer, int tileSize) {
 	if (renderer != nullptr) {
+		int w,h;
+		SDL_QueryTexture(texture,NULL,NULL,&w,&h);
+
 		SDL_Rect rect = {
 			(int)((pos.x - size / 2) * tileSize),
 			(int)((pos.y - size / 2) * tileSize),
-			(int)(size * tileSize),
-			(int)(size * tileSize) };
+			 w,
+			 h };
 		SDL_RenderCopy(renderer, texture, NULL, &rect);
 	}
 }

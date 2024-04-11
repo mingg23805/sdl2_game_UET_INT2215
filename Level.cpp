@@ -33,9 +33,22 @@ Level::Level(SDL_Renderer* renderer, int setTileCountX, int setTileCountY) :
 
 
 void Level::draw(SDL_Renderer* renderer, int tileSize) {
-    for (int count = 0; count < listTiles.size(); count++)
-        drawTile(renderer, (count % tileCountX), (count / tileCountY), tileSize);
 
+   for (int y = 0; y < tileCountY; y++) {
+        for (int x = 0; x < tileCountX; x++) {
+            if ( (x+y) %2 == 0 )  SDL_SetRenderDrawColor(renderer,240,240,240,255);
+            else  SDL_SetRenderDrawColor(renderer,225,225,225,255);
+
+            SDL_Rect rect ={x* tileSize ,y*tileSize,tileSize,tileSize};
+            SDL_RenderFillRect(renderer,&rect);
+        }
+    }
+
+
+
+  /* for (int count = 0; count < listTiles.size(); count++)
+        drawTile(renderer, (count % tileCountX), (count / tileCountX), tileSize);
+*/
    for (int y = 0; y < tileCountY; y++) {
         for (int x = 0; x < tileCountX; x++) {
             if (getTileType(x,y)== Type::spawner) {
@@ -107,14 +120,14 @@ Vector2D Level ::getRanSpawnerLocation()
     for(int i=0;i<listTiles.size();i++)
     {
         auto& tileSelected =listTiles[i];
-        if(tileSelected.type==Type::spawner)
-            listSpawner.push_back(i);
+        if(tileSelected.type==Type::spawner) listSpawner.push_back(i);
     }
     if(listSpawner.empty()==false)
     {
         int index= listSpawner[rand()%  listSpawner.size() ];
-        return Vector2D( index% tileCountX +0.5 ,index/tileCountX +0.5 );
+        return Vector2D( (float)(index% tileCountX) +0.5 ,(float)( index/tileCountX )+0.5 );
     }
+    return Vector2D(0.5,0.5);
 }
 bool Level::isTileWall(int x, int y) {
   return getTileType(x,y)==Type::wall;

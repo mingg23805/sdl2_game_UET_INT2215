@@ -5,7 +5,7 @@
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight) :
     placementModeCurrent(PlacementMode::wall),
     level(renderer, windowWidth / tileSize, windowHeight / tileSize) ,
-    spawnT(0.25),roundT(5.0)
+    spawnT(0.25f),roundT(5.0f)
     {
 
     if (window != nullptr && renderer != nullptr) {
@@ -137,10 +137,9 @@ void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
    spawnT.countDown(dT);
    if(listUnits.empty() && unitCount==0)
    {   roundT.countDown(dT);
-
        if(roundT.timeSIsZero()==true)
      {
-       unitCount==15;
+       unitCount=15;
        roundT.resetToMax();
      }
    }
