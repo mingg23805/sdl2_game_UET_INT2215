@@ -6,7 +6,7 @@
 #include "Unit.h"
 #include "Level.h"
 #include"timer.h"
-
+#include"turret.h"
 
 class Game
 {
@@ -29,7 +29,7 @@ private:
 	void updateSpawnUnits(SDL_Renderer *renderer ,float dT);
 	void addUnit(SDL_Renderer* renderer, Vector2D posMouse);
 	void removeUnitsAtMousePosition(Vector2D posMouse);
-
+    void addTurret(SDL_Renderer* renderer, Vector2D posMouse);
 
 	int mouseDownStatus = 0;
 
@@ -37,6 +37,8 @@ private:
 	Level level;
 
 	std::vector<Unit> listUnits;
+	std::vector<Turret>listTurrets;
+
     Timer spawnT ,roundT;
 
     int unitCount=0;

@@ -130,6 +130,9 @@ void Game::update(float dT,SDL_Renderer *renderer) {
         else
         it++;
     }
+    for(auto&selectedTurret : listTurrets)
+        selectedTurret.update(dT);
+
       updateSpawnUnits(renderer,dT);
 }
 void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
@@ -166,6 +169,12 @@ void Game::draw(SDL_Renderer* renderer) {
         unitSelected.draw(renderer, tileSize);
 
 
+
+    for (auto& selectedTurret : listUnits)
+        selectedTurret.draw(renderer, tileSize);
+
+
+
     if (textureOverlay != nullptr && overlayVisible) {
         int w = 0, h = 0;
         SDL_QueryTexture(textureOverlay, NULL, NULL, &w, &h);
@@ -182,7 +191,11 @@ void Game::addUnit(SDL_Renderer* renderer, Vector2D posMouse) {
     listUnits.push_back(Unit(renderer, posMouse));
 }
 
+void Game ::addTurret(SDL_Renderer* renderer, Vector2D posMouse)
+{
 
+
+}
 
 void Game::removeUnitsAtMousePosition(Vector2D posMouse) {
     for (int count = 0; count < listUnits.size(); count++) {
