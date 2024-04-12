@@ -2,6 +2,7 @@
 #include<SDL.h>
 #include"TextureLoader.h"
 #include"Vector2D.h"
+#include<bits/stdc++.h>
 
 class Turret
 { private:
@@ -18,5 +19,6 @@ class Turret
     void drawTurretPart(SDL_Renderer* renderer,SDL_Texture* selectedTexture,
                         int tileSize);
     bool checkOnTile(int x,int y);
+    	static const float size;
 
 };

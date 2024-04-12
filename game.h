@@ -1,7 +1,5 @@
 #pragma once
-#include <vector>
-#include <chrono>
-#include <memory>
+#include<bits/stdc++.h>
 #include <SDL.h>
 #include "Unit.h"
 #include "Level.h"
@@ -27,6 +25,7 @@ private:
 	void update(float dT,SDL_Renderer *renderer);
 	void draw(SDL_Renderer* renderer);
 	void updateSpawnUnits(SDL_Renderer *renderer ,float dT);
+	void updateUnits(float dT);
 	void addUnit(SDL_Renderer* renderer, Vector2D posMouse);
     void addTurret(SDL_Renderer* renderer, Vector2D posMouse);
 
@@ -38,7 +37,7 @@ private:
 	const int tileSize = 48;
 	Level level;
 
-	std::vector<Unit> listUnits;
+	std::vector<std::shared_ptr<Unit>> listUnits;//ptr tro den 1 dt
 	std::vector<Turret>listTurrets;
 
     Timer spawnT ,roundT;

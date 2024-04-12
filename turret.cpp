@@ -28,18 +28,17 @@ void Turret::drawTurretPart(SDL_Renderer* renderer,
 {
       if(renderer!=nullptr && selectedTexture!=nullptr)
       {
-          int w,h;
-         SDL_QueryTexture(selectedTexture,NULL,NULL,&w,&h);
-         SDL_Rect rect={
-         pos.x*tileSize - w/2,
-         pos.y*tileSize - h/2,
-         w,
-         h
+		int w,h;
+		SDL_QueryTexture(selectedTexture,NULL,NULL,&w,&h);
 
-         };
-       SDL_RenderCopyEx(renderer,selectedTexture,NULL,&rect,
-                        angle*180/pi,NULL,SDL_FLIP_NONE);
-      }
+		SDL_Rect rect = {
+			(int)(pos.x*tileSize)-w/2,
+			(int)(pos.y*tileSize)-h/2,
+			 w,
+			 h };
+		SDL_RenderCopyEx(renderer,selectedTexture,NULL,&rect,
+                   angle*180/pi,NULL,SDL_FLIP_NONE);
+	}
 
 }
 bool Turret::checkOnTile(int x,int y)

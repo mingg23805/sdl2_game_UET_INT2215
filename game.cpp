@@ -101,7 +101,8 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
                 break;
             case PlacementMode::turret:
 
-                if (mouseDownThisFrame)
+                if (mouseDownThisFrame&&
+                    level.isTileWall((int)posMouse.x, (int)posMouse.y ) )
                     addTurret(renderer,posMouse);
                 break;
             }
@@ -112,7 +113,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
 
             level.setTileWall((int)posMouse.x, (int)posMouse.y, false);
 
-            removeUnitsAtMousePosition(posMouse);
+          //  removeUnitsAtMousePosition(posMouse);
             break;
         }
     }
@@ -122,16 +123,9 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
 
 void Game::update(float dT,SDL_Renderer *renderer) {
 
-    for (auto it = listUnits.begin() ;it!=listUnits.end();)
-    {
-        (*it).update(dT,level,listUnits);
-        if((*it).checkALive()==false)
-            it=listUnits.erase(it);
-        else
-        it++;
-    }
+     updateUnits(dT);
     for(auto&selectedTurret : listTurrets)
-        selectedTurret.update(dT);
+      selectedTurret.update(dT);
 
       updateSpawnUnits(renderer,dT);
 }
@@ -153,7 +147,25 @@ void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
                spawnT.resetToMax();
    }
 }
-
+void Game::updateUnits(float dT)
+{
+    auto it= listUnits.begin();
+    while( it!=listUnits.end() )
+    {
+     bool increase=true;
+        if(*(it)!=nullptr)
+        {
+          (*it)->update(dT,level,listUnits);
+           if((*it) -> checkALive()==false )
+          {
+           it=listUnits.erase(it);
+           increase=false;
+          }
+        }
+        if(increase)
+            it++;
+    }
+}
 
 void Game::draw(SDL_Renderer* renderer) {
 
@@ -166,7 +178,7 @@ void Game::draw(SDL_Renderer* renderer) {
     level.draw(renderer, tileSize);
 
     for (auto& unitSelected : listUnits)
-        unitSelected.draw(renderer, tileSize);
+        if(unitSelected != nullptr)unitSelected->draw(renderer, tileSize);
 
 
 
@@ -188,12 +200,13 @@ void Game::draw(SDL_Renderer* renderer) {
 
 
 void Game::addUnit(SDL_Renderer* renderer, Vector2D posMouse) {
-    listUnits.push_back(Unit(renderer, posMouse));
+    listUnits.push_back(std:: make_shared<Unit>(renderer, posMouse));
+    //create shared ptr
 }
 
 void Game ::addTurret(SDL_Renderer* renderer, Vector2D posMouse)
 {
-   Vector2D pos( posMouse.x+0.5,posMouse.y+0.5);
+   Vector2D pos( (int)posMouse.x+0.5f,(int)posMouse.y+0.5f);
    listTurrets.push_back(Turret(renderer,pos));
 
 }
@@ -201,7 +214,7 @@ void Game ::addTurret(SDL_Renderer* renderer, Vector2D posMouse)
 void Game::removeUnitsAtMousePosition(Vector2D posMouse) {
     for (int count = 0; count < listUnits.size(); count++) {
         auto& unitSelected = listUnits[count];
-        if (unitSelected.checkOverlap(posMouse, 0.0f)) {
+        if (unitSelected->checkOverlap(posMouse, 0.0f)) {
             listUnits.erase(listUnits.begin() + count);
             count--;
         }

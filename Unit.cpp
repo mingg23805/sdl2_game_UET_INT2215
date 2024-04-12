@@ -19,8 +19,8 @@ bool Unit::checkALive()
     return isAlive;
 }
 
-
-void Unit::update(float dT, Level& level, std::vector<Unit>& listUnits) {
+void Unit::update(float dT, Level& level, std::vector<std::shared_ptr <Unit> >& listUnits)
+{
 	float distanceToTarget = (level.getTargetPos() - pos).magnitude();
      if(distanceToTarget<=sqrt(2)/2) isAlive=false;
 
@@ -39,8 +39,9 @@ void Unit::update(float dT, Level& level, std::vector<Unit>& listUnits) {
 	bool moveOk = true;
 	for (int count = 0; count < listUnits.size() && moveOk; count++) {
 		auto& unitSelected = listUnits[count];
-		if (&unitSelected != this && unitSelected.checkOverlap(pos, size)) {
-			Vector2D directionToOther = (unitSelected.pos - pos);
+		if (unitSelected != nullptr
+            && unitSelected->checkOverlap(pos, size) && unitSelected.get()!= this  ) {
+			Vector2D directionToOther = (unitSelected->pos - pos);
 			if (directionToOther.magnitude() > 0.01f) {
 				Vector2D normalToOther(directionToOther.normalize());
 				float angleBtw = std::abs(normalToOther.angleBetween(directionNormal));
