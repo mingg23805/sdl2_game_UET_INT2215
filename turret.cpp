@@ -17,20 +17,22 @@ void Turret::update(float dT)
 }
 void Turret::draw(SDL_Renderer* renderer,int tileSize)
 {
-   drawTurretPart(renderer,textureTurretOn,0,tileSize);
-   drawTurretPart(renderer,textureTurretUnder,5,tileSize);
+
+     drawTurretPart(renderer,textureTurretUnder,tileSize);
+     drawTurretPart(renderer,textureTurretOn,tileSize);
+
 
 }
 void Turret::drawTurretPart(SDL_Renderer* renderer,
-                            SDL_Texture* selectedTexture,int offset,int tileSize)
+                            SDL_Texture* selectedTexture,int tileSize)
 {
       if(renderer!=nullptr && selectedTexture!=nullptr)
       {
           int w,h;
          SDL_QueryTexture(selectedTexture,NULL,NULL,&w,&h);
          SDL_Rect rect={
-         pos.x*tileSize - w/2+offset,
-         pos.y*tileSize - h/2+offset,
+         pos.x*tileSize - w/2,
+         pos.y*tileSize - h/2,
          w,
          h
 
@@ -39,4 +41,9 @@ void Turret::drawTurretPart(SDL_Renderer* renderer,
                         angle*180/pi,NULL,SDL_FLIP_NONE);
       }
 
+}
+bool Turret::checkOnTile(int x,int y)
+{
+
+    return ( (int)(pos.x) == x&& (int) (pos.y) ==y );
 }

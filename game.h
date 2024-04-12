@@ -13,7 +13,7 @@ class Game
 private:
 	enum class PlacementMode {
 		wall,
-		units
+		turret
 	} placementModeCurrent;
 
 
@@ -28,8 +28,10 @@ private:
 	void draw(SDL_Renderer* renderer);
 	void updateSpawnUnits(SDL_Renderer *renderer ,float dT);
 	void addUnit(SDL_Renderer* renderer, Vector2D posMouse);
-	void removeUnitsAtMousePosition(Vector2D posMouse);
     void addTurret(SDL_Renderer* renderer, Vector2D posMouse);
+
+	void removeUnitsAtMousePosition(Vector2D posMouse);
+    void removeTurretsAtMousePosition(Vector2D posMouse);
 
 	int mouseDownStatus = 0;
 

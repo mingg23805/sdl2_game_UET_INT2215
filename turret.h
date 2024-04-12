@@ -16,5 +16,7 @@ class Turret
      float speedAngular ;//omega
     void draw(SDL_Renderer* renderer,int tileSize);
     void drawTurretPart(SDL_Renderer* renderer,SDL_Texture* selectedTexture,
-                        int offset,int tileSize);
+                        int tileSize);
+    bool checkOnTile(int x,int y);
+
 };

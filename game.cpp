@@ -73,7 +73,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
                 placementModeCurrent = PlacementMode::wall;
                 break;
             case SDL_SCANCODE_2:
-                placementModeCurrent = PlacementMode::units;
+                placementModeCurrent = PlacementMode::turret;
                 break;
 
 
@@ -99,10 +99,10 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
 
                 level.setTileWall((int)posMouse.x, (int)posMouse.y, true);
                 break;
-            case PlacementMode::units:
+            case PlacementMode::turret:
 
                 if (mouseDownThisFrame)
-                    addUnit(renderer, posMouse);
+                    addTurret(renderer,posMouse);
                 break;
             }
             break;
@@ -170,7 +170,7 @@ void Game::draw(SDL_Renderer* renderer) {
 
 
 
-    for (auto& selectedTurret : listUnits)
+    for (auto& selectedTurret : listTurrets)
         selectedTurret.draw(renderer, tileSize);
 
 
@@ -193,7 +193,8 @@ void Game::addUnit(SDL_Renderer* renderer, Vector2D posMouse) {
 
 void Game ::addTurret(SDL_Renderer* renderer, Vector2D posMouse)
 {
-
+   Vector2D pos( posMouse.x+0.5,posMouse.y+0.5);
+   listTurrets.push_back(Turret(renderer,pos));
 
 }
 
@@ -206,4 +207,14 @@ void Game::removeUnitsAtMousePosition(Vector2D posMouse) {
         }
     }
 }
+void Game ::removeTurretsAtMousePosition(Vector2D posMouse)
+{
+    for(auto it =listTurrets.begin();it!=listTurrets.end();)
+    {
+        if((*it).checkOnTile((int )posMouse.x ,(int) posMouse.y ))
+            it=listTurrets.erase(it);
+        else it++;
 
+    }
+
+}
