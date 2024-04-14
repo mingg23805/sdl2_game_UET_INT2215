@@ -7,11 +7,27 @@ Turret::Turret(SDL_Renderer* renderer ,Vector2D setPos) :
        textureTurretUnder=TextureLoader::loadTexture(renderer,"Turret Under.bmp");
        speedAngular=pi;
     }
-void Turret::update(float dT)
-{
-    angle+=speedAngular*dT;
-    if(angle>2*pi)
-        angle=angle-2*pi;
+void Turret::update(float dT,std::vector<std::shared_ptr<Unit>>&listUnits )
+{   if(auto unitTargetSP= unitTarget.lock())
+    {  if(unitTargetSP->checkALive()==false
+           or (unitTargetSP->getPos()-pos).magnitude()>range )
+            unitTarget.reset();
+    }
+    if(unitTarget.expired())
+    unitTarget=findEUnit(listUnits);
+    if(auto unitTargetSP=unitTarget.lock())
+    {
+        Vector2D directionNormalTarget= (unitTargetSP->getPos()-pos).normalize();
+        float angleToTarget= directionNormalTarget.angleBetween(Vector2D(angle));
+
+        if(std:: abs(angleToTarget)!=0 )
+        {
+            float angleMove= -copysign(speedAngular*dT,angleToTarget);
+            if(std::abs(angleMove)> std::abs(angleToTarget)) angle=directionNormalTarget.angle();
+            else                                   angle+=angleMove;
+        }
+
+    }
 
 }
 void Turret::draw(SDL_Renderer* renderer,int tileSize)
@@ -45,7 +61,7 @@ bool Turret::checkOnTile(int x,int y)
 
     return ( (int)(pos.x) == x&& (int) (pos.y) ==y );
 }
-  std::weak_ptr<Unit> Turret::findEUnit(std::vector<std::shared_ptr<Unit>>& listUnits )
+std::weak_ptr<Unit> Turret::findEUnit(std::vector<std::shared_ptr<Unit>>& listUnits )
   {
       std::weak_ptr<Unit> closetUnit;
       float closetDistance=0;
@@ -63,4 +79,5 @@ bool Turret::checkOnTile(int x,int y)
             }
           }
       }
+      return closetUnit;
   }

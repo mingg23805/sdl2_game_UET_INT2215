@@ -125,7 +125,7 @@ void Game::update(float dT,SDL_Renderer *renderer) {
 
      updateUnits(dT);
     for(auto&selectedTurret : listTurrets)
-      selectedTurret.update(dT);
+      selectedTurret.update(dT,listUnits );
 
       updateSpawnUnits(renderer,dT);
 }

@@ -13,9 +13,10 @@ class Turret
 
     SDL_Texture *textureTurretOn=nullptr,
                 *textureTurretUnder=nullptr;
+    std::weak_ptr<Unit> unitTarget;
     public:
     Turret(SDL_Renderer *renderer ,Vector2D setPos);
-    void update(float dT);
+    void update(float dT,std::vector<std::shared_ptr<Unit>>&listUnits  );
      float speedAngular ;//omega
      float range;
 
