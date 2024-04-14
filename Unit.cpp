@@ -18,7 +18,11 @@ bool Unit::checkALive()
 
     return isAlive;
 }
+Vector2D Unit::getPos()
+{
+    return pos;
 
+}
 void Unit::update(float dT, Level& level, std::vector<std::shared_ptr <Unit> >& listUnits)
 {
 	float distanceToTarget = (level.getTargetPos() - pos).magnitude();

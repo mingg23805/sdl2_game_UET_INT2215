@@ -1,8 +1,7 @@
 #include"turret.h"
 const float pi=3.14159;
-
 Turret::Turret(SDL_Renderer* renderer ,Vector2D setPos) :
-    pos(setPos), angle(0)
+    pos(setPos), angle(0),range(5.0)
     {
        textureTurretOn= TextureLoader::loadTexture(renderer,"Turret On.bmp") ;
        textureTurretUnder=TextureLoader::loadTexture(renderer,"Turret Under.bmp");
@@ -46,3 +45,22 @@ bool Turret::checkOnTile(int x,int y)
 
     return ( (int)(pos.x) == x&& (int) (pos.y) ==y );
 }
+  std::weak_ptr<Unit> Turret::findEUnit(std::vector<std::shared_ptr<Unit>>& listUnits )
+  {
+      std::weak_ptr<Unit> closetUnit;
+      float closetDistance=0;
+      for(auto& selcetedUnit :listUnits )
+      {
+
+          if(selcetedUnit!=nullptr)
+        {
+            float currentDistance=( pos-selcetedUnit->getPos( )).magnitude();
+            if(currentDistance<range &&
+               (closetUnit.expired() or currentDistance< closetDistance))
+            {
+                closetUnit=selcetedUnit;
+                closetDistance=currentDistance;
+            }
+          }
+      }
+  }

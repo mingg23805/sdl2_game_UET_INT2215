@@ -17,6 +17,7 @@ public:
 	void draw(SDL_Renderer* renderer, int tileSize);
 	bool checkOverlap(Vector2D posOther, float sizeOther);
     bool checkALive();
+    Vector2D getPos();
 
 private:
 	Vector2D pos;
