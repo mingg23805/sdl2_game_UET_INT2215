@@ -125,7 +125,8 @@ void Game::update(float dT,SDL_Renderer *renderer) {
 
      updateUnits(dT);
     for(auto&selectedTurret : listTurrets)
-      selectedTurret.update(dT,listUnits );
+      selectedTurret.update(dT,listUnits,renderer,listProjectiles );
+   updateProjectiles(dT);
 
       updateSpawnUnits(renderer,dT);
 }
@@ -166,7 +167,24 @@ void Game::updateUnits(float dT)
             it++;
     }
 }
+void Game::updateProjectiles(float dT)
+{
+    auto it=listProjectiles.begin();
+    while(it!=listProjectiles.end())
+    {
+        (*it).update(dT);
+        if((*it).getCollison())
+        {
+            it=listProjectiles.erase(it);
 
+        }
+        else
+        {
+            it++;
+        }
+    }
+
+}
 void Game::draw(SDL_Renderer* renderer) {
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
@@ -184,6 +202,9 @@ void Game::draw(SDL_Renderer* renderer) {
 
     for (auto& selectedTurret : listTurrets)
         selectedTurret.draw(renderer, tileSize);
+
+        for(auto&selectedProjectile : listProjectiles)
+     selectedProjectile.draw(renderer,tileSize);
 
 
 

@@ -1,20 +1,39 @@
 #include"turret.h"
 const float pi=3.14159;
 Turret::Turret(SDL_Renderer* renderer ,Vector2D setPos) :
-    pos(setPos), angle(0),range(5.0)
+    pos(setPos), angle(0),range(5.0),timeDelay(1.0)
     {
        textureTurretOn= TextureLoader::loadTexture(renderer,"Turret On.bmp") ;
        textureTurretUnder=TextureLoader::loadTexture(renderer,"Turret Under.bmp");
        speedAngular=pi;
     }
-void Turret::update(float dT,std::vector<std::shared_ptr<Unit>>&listUnits )
-{   if(auto unitTargetSP= unitTarget.lock())
+void Turret::update(float dT,std::vector<std::shared_ptr<Unit>>&listUnits
+                    ,SDL_Renderer* renderer,std::vector<Projectile>& listProjectiles)
+{  timeDelay.countDown(dT);
+     if(auto unitTargetSP= unitTarget.lock())
     {  if(unitTargetSP->checkALive()==false
            or (unitTargetSP->getPos()-pos).magnitude()>range )
             unitTarget.reset();
     }
     if(unitTarget.expired())
     unitTarget=findEUnit(listUnits);
+
+     if(updateAngle(dT) &&unitTarget.expired()==false)
+       shootProjectile(renderer,listProjectiles);
+
+
+}
+ void Turret::shootProjectile(SDL_Renderer* renderer,std::vector<Projectile>&listProjectiles)
+ {
+     if(timeDelay.timeSIsZero())
+     {
+         listProjectiles.push_back(Projectile(renderer,pos,Vector2D(angle)));
+         timeDelay.resetToMax();
+
+     }
+ }
+bool Turret::updateAngle(float dT)
+{
     if(auto unitTargetSP=unitTarget.lock())
     {
         Vector2D directionNormalTarget= (unitTargetSP->getPos()-pos).normalize();
@@ -23,12 +42,17 @@ void Turret::update(float dT,std::vector<std::shared_ptr<Unit>>&listUnits )
         if(std:: abs(angleToTarget)!=0 )
         {
             float angleMove= -copysign(speedAngular*dT,angleToTarget);
-            if(std::abs(angleMove)> std::abs(angleToTarget)) angle=directionNormalTarget.angle();
-            else                                   angle+=angleMove;
+            if(std::abs(angleMove)> std::abs(angleToTarget))
+            {angle=directionNormalTarget.angle();
+            return true;}
+            else
+             angle+=angleMove;
         }
 
     }
+    else { return true;}
 
+    return false;
 }
 void Turret::draw(SDL_Renderer* renderer,int tileSize)
 {

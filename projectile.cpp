@@ -1,12 +1,32 @@
 #include"projectile.h"
-const float Projectile::speed=10,Projectile::size=0.2;
+const float Projectile::speed=10,Projectile::size=0.2,
+            Projectile::distanceTravelMax=5;//= turretRange
 
 Projectile::Projectile(SDL_Renderer* renderer,Vector2D setPos, Vector2D setDirectionNormal) :
     pos(setPos) ,directionNormal(setDirectionNormal)
-{ texture=TextureLoader::loadTexture(renderer,"Projectile.bmp");
+{
+    texture=TextureLoader::loadTexture(renderer,"Projectile.bmp");
 }
-void Projectile::update(float dT)
-{  pos+=directionNormal*speed*dT;
+
+void Projectile:: update(float dT,std::vector<std::shared_ptr<Unit>>& listUnits)
+{         float distanceMove=speed*dT;
+         pos+=directionNormal*distanceMove;
+         distanceTraveled+=distanceMove;
+
+         if(distanceTraveled>=distanceTravelMax)
+         {
+             collision=true;
+         }
+         checkCollision(listUnits);
+}
+bool Projectile::getCollison()
+{
+
+    return collision;
+}
+void Projectile::checkCollision(std::vector<std::shared_ptr<Unit>>& listUnits)
+{
+
 }
 void Projectile::draw(SDL_Renderer*renderer ,int tileSize)
 {

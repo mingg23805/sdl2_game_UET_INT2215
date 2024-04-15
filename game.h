@@ -23,10 +23,12 @@ public:
 
 private:
 	void processEvents(SDL_Renderer* renderer, bool& running);
+
 	void update(float dT,SDL_Renderer *renderer);
-	void draw(SDL_Renderer* renderer);
 	void updateSpawnUnits(SDL_Renderer *renderer ,float dT);
 	void updateUnits(float dT);
+	void updateProjectiles(float dT);
+	void draw(SDL_Renderer* renderer);
 	void addUnit(SDL_Renderer* renderer, Vector2D posMouse);
     void addTurret(SDL_Renderer* renderer, Vector2D posMouse);
 
@@ -38,9 +40,9 @@ private:
 	const int tileSize = 48;
 	Level level;
 
-	std::vector<std::shared_ptr<Unit>> listUnits;//ptr tro den 1 dt
+	std::vector<std::shared_ptr<Unit>> listUnits;//ptr tro den cung 1 dt
 	std::vector<Turret>listTurrets;
-
+    std::vector<Projectile> listProjectiles;
     Timer spawnT ,roundT;
 
     int unitCount=0;
