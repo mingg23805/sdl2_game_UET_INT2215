@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL.h>
+#include<SDL_mixer.h>
 #include "Game.h"
 
 
@@ -9,7 +10,7 @@ int main(int argc, char* args[]) {
 
 	srand(time(NULL));
 
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+	if (SDL_Init(SDL_INIT_VIDEO) < 0 or SDL_Init(SDL_INIT_AUDIO)<0) {
 		std::cout << "Error: Couldn't initialize SDL Video = " << SDL_GetError() << std::endl;
 		return 1;
 	}

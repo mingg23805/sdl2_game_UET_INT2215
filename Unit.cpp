@@ -9,24 +9,25 @@ const float Unit::size = 0.48f;
 
 
 Unit::Unit(SDL_Renderer* renderer, Vector2D setPos) :
-	pos(setPos) {
+	pos(setPos),timeJustHurt(0.25) {
 	texture = TextureLoader::loadTexture(renderer, "Unit.bmp");
 
 }
 bool Unit::checkALive()
 {
-
-    return isAlive;
+   return (currentHp>0);
 }
 Vector2D Unit::getPos()
 {
     return pos;
-
 }
 void Unit::update(float dT, Level& level, std::vector<std::shared_ptr <Unit> >& listUnits)
-{
+{   timeJustHurt.countDown(dT);
+
 	float distanceToTarget = (level.getTargetPos() - pos).magnitude();
-     if(distanceToTarget<=sqrt(2)/2) isAlive=false;
+
+     if(distanceToTarget<=sqrt(2)/2)
+        currentHp=0;
 
 	float distanceMove = speed * dT;
 	if (distanceMove > distanceToTarget)
@@ -73,6 +74,10 @@ void Unit::update(float dT, Level& level, std::vector<std::shared_ptr <Unit> >& 
 
 
 void Unit::draw(SDL_Renderer* renderer, int tileSize) {
+	if(timeJustHurt.timeSIsZero()==false)
+	 SDL_SetTextureColorMod(texture,255,0,0);//red
+	 else
+        SDL_SetTextureColorMod(texture,255,255,255);
 	if (renderer != nullptr) {
 		int w,h;
 		SDL_QueryTexture(texture,NULL,NULL,&w,&h);
@@ -86,8 +91,14 @@ void Unit::draw(SDL_Renderer* renderer, int tileSize) {
 	}
 }
 
-
-
 bool Unit::checkOverlap(Vector2D posOther, float sizeOther) {
 	return (posOther - pos).magnitude() <= (sizeOther + size) / 2.0f;
+}
+void Unit::hploss(int dmg)
+{
+    if(dmg>0) currentHp-=dmg;
+    if(currentHp<=0) currentHp=0;
+
+    timeJustHurt.resetToMax();
+
 }

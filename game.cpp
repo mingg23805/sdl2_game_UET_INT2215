@@ -172,7 +172,7 @@ void Game::updateProjectiles(float dT)
     auto it=listProjectiles.begin();
     while(it!=listProjectiles.end())
     {
-        (*it).update(dT);
+        (*it).update(dT,listUnits);
         if((*it).getCollison())
         {
             it=listProjectiles.erase(it);

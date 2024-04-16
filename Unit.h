@@ -5,6 +5,7 @@
 #include "Level.h"
 #include "TextureLoader.h"
 #include <memory>
+#include"timer.h"
 class Game;
 
 
@@ -18,11 +19,15 @@ public:
 	bool checkOverlap(Vector2D posOther, float sizeOther);
     bool checkALive();
     Vector2D getPos();
+    void hploss(int dmg);
+
+    int maxHp=2;
+    int currentHp=maxHp;
 
 private:
 	Vector2D pos;
+     Timer timeJustHurt;
 	static const float speed;
 	static const float size;
-    bool isAlive=true;
 	SDL_Texture* texture = nullptr;
 };

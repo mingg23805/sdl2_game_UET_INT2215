@@ -26,7 +26,20 @@ bool Projectile::getCollison()
 }
 void Projectile::checkCollision(std::vector<std::shared_ptr<Unit>>& listUnits)
 {
+  if(collision==false)
+  {
+      for(int i=0;i<=listUnits.size();i++)
+      {
+          auto& selcectedUnit=listUnits[i];
+          if(selcectedUnit!= nullptr && selcectedUnit->checkOverlap(pos,size))
+          {
+              selcectedUnit->hploss(1);
+              collision=true;
+          }
+          if(collision) break;
+      }
 
+  }
 }
 void Projectile::draw(SDL_Renderer*renderer ,int tileSize)
 {
