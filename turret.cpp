@@ -2,10 +2,11 @@
 const float pi=3.14159;
 Turret::Turret(SDL_Renderer* renderer ,Vector2D setPos) :
     pos(setPos), angle(0),range(5.0),timeDelay(1.0)
-    {
+    {    speedAngular=pi;
        textureTurretOn= TextureLoader::loadTexture(renderer,"Turret On.bmp") ;
        textureTurretUnder=TextureLoader::loadTexture(renderer,"Turret Under.bmp");
-       speedAngular=pi;
+
+       mix_chunkShoot=MixerLoader::loadMix("Turret Shoot.ogg");
     }
 void Turret::update(float dT,std::vector<std::shared_ptr<Unit>>&listUnits
                     ,SDL_Renderer* renderer,std::vector<Projectile>& listProjectiles)
@@ -28,9 +29,14 @@ void Turret::update(float dT,std::vector<std::shared_ptr<Unit>>&listUnits
      if(timeDelay.timeSIsZero())
      {
          listProjectiles.push_back(Projectile(renderer,pos,Vector2D(angle)));
+
+        if(mix_chunkShoot!=nullptr)
+        Mix_PlayChannel(-1,mix_chunkShoot,0);
+
          timeDelay.resetToMax();
 
      }
+
  }
 bool Turret::updateAngle(float dT)
 {

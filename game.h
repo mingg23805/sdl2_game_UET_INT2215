@@ -6,6 +6,7 @@
 #include"timer.h"
 #include"turret.h"
 #include"projectile.h"
+#include"MixerLoader.h"
 
 class Game
 {

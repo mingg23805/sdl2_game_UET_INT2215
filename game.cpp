@@ -38,6 +38,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 
 Game::~Game() {
     TextureLoader::deallocateTextures();
+    MixerLoader::deallocateMix();
 }
 
 

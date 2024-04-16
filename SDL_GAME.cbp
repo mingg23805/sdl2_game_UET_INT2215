@@ -35,6 +35,8 @@
 		<Unit filename="Game.h" />
 		<Unit filename="Level.cpp" />
 		<Unit filename="Level.h" />
+		<Unit filename="MixerLoader.cpp" />
+		<Unit filename="MixerLoader.h" />
 		<Unit filename="TextureLoader.cpp" />
 		<Unit filename="TextureLoader.h" />
 		<Unit filename="Unit.cpp" />

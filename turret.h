@@ -6,13 +6,14 @@
 #include"projectile.h"
 #include"Unit.h"
 #include"timer.h"
+#include"MixerLoader.h"
 #include<bits/stdc++.h>
 
 class Turret
 { private:
     Vector2D pos;
     float angle;
-    Timer timeDelay;
+
 
     SDL_Texture *textureTurretOn=nullptr,
                 *textureTurretUnder=nullptr;
@@ -27,7 +28,7 @@ class Turret
                     ,SDL_Renderer* renderer,std::vector<Projectile>& listProjectiles);
      float speedAngular ;//omega
      float range;
-
+   Timer timeDelay;
 
     std::weak_ptr<Unit> findEUnit(std::vector<std::shared_ptr<Unit>>& listUnits );
 
@@ -36,5 +37,5 @@ class Turret
                         int tileSize);
     bool checkOnTile(int x,int y);
     	static const float size;
-
+    Mix_Chunk* mix_chunkShoot = nullptr;
 };
