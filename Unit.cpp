@@ -21,6 +21,11 @@ Vector2D Unit::getPos()
 {
     return pos;
 }
+void Unit:: getStrongerUnit(int lv)
+{
+    maxHp=2+lv;
+    currentHp=maxHp;
+}
 void Unit::update(float dT, Level& level, std::vector<std::shared_ptr <Unit> >& listUnits)
 {   timeJustHurt.countDown(dT);
 

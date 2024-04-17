@@ -47,6 +47,7 @@ private:
     Timer spawnT ,roundT;
 
     int unitCount=0;
+    int lv=1;
 
     Mix_Chunk* mix_chunkSpawnUnit=nullptr;
 	SDL_Texture* textureOverlay = nullptr;

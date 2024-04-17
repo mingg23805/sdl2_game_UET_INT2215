@@ -49,7 +49,7 @@
 1712588547 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\enemy.h
 	"game.h"
 
-1713325758 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
+1713366229 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
 	<bits/stdc++.h>
 	<SDL.h>
 	"Unit.h"
@@ -64,13 +64,12 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1713325901 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
+1713362824 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
 	"Game.h"
 
-1713325973 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
+1713361971 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
 	<iostream>
 	<SDL.h>
-	<SDL_mixer.h>
 	"Game.h"
 
 1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\menu.h
@@ -107,7 +106,7 @@
 
 1712647081 source:d:\test\gamee\main.c
 
-1713260175 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.h
+1713363877 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.h
 	<vector>
 	<SDL.h>
 	"Vector2D.h"
@@ -119,7 +118,7 @@
 1678099102 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\vector2d.h
 	<cmath>
 
-1712759000 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.h
+1713361971 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.h
 	<queue>
 	<vector>
 	<string>
@@ -138,11 +137,11 @@
 1712668462 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\textureloader.cpp
 	"TextureLoader.h"
 
-1713260183 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.cpp
+1713364108 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.cpp
 	"Unit.h"
 	"Game.h"
 
-1712829205 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.cpp
+1713333914 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.cpp
 	"Level.h"
 
 1712768224 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\timer.h
@@ -151,7 +150,7 @@
 1712767865 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\timer.cpp
 	"timer.h"
 
-1713325630 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.cpp
+1713361846 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.cpp
 	"turret.h"
 
 1713324549 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.h
@@ -181,6 +180,6 @@
 	<SDL_mixer.h>
 	<bits/stdc++.h>
 
-1713325390 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\mixerloader.cpp
+1713359078 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\mixerloader.cpp
 	"MixerLoader.h"
 

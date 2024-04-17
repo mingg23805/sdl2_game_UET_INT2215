@@ -22,7 +22,6 @@ void Turret::update(float dT,std::vector<std::shared_ptr<Unit>>&listUnits
      if(updateAngle(dT) &&unitTarget.expired()==false)
       {
           shootProjectile(renderer,listProjectiles);
-       //Mix_FreeChunk(mix_chunkShoot);
       }
 
 }
@@ -32,8 +31,8 @@ void Turret::update(float dT,std::vector<std::shared_ptr<Unit>>&listUnits
      {
          listProjectiles.push_back(Projectile(renderer,pos,Vector2D(angle)));
 
-     //  if(mix_chunkShoot!=nullptr)
-         Mix_PlayChannel(-1,mix_chunkShoot,0);
+       if(mix_chunkShoot!=nullptr)
+        Mix_PlayChannel(-1,mix_chunkShoot,0);
 
          timeDelay.resetToMax();
 

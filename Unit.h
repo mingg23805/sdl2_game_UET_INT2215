@@ -20,9 +20,9 @@ public:
     bool checkALive();
     Vector2D getPos();
     void hploss(int dmg);
-
-    int maxHp=2;
-    int currentHp=maxHp;
+    void getStrongerUnit(int lv);
+    int maxHp;
+    int currentHp;
 
 private:
 	Vector2D pos;

@@ -11,7 +11,8 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
     if (window != nullptr && renderer != nullptr) {
 
         textureOverlay = TextureLoader::loadTexture(renderer, "Overlay.bmp");
-        mix_chunkSpawnUnit=MixerLoader::loadMix("Spawn Unit.wav");
+         mix_chunkSpawnUnit=MixerLoader::loadMix("1.wav");
+
         auto time1 = std::chrono::system_clock::now();
         auto time2 = std::chrono::system_clock::now();
 
@@ -38,7 +39,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 
 Game::~Game() {
     TextureLoader::deallocateTextures();
-   // MixerLoader::deallocateMix();
+    MixerLoader::deallocateMix();
 }
 
 
@@ -114,7 +115,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
 
             level.setTileWall((int)posMouse.x, (int)posMouse.y, false);
 
-          //  removeUnitsAtMousePosition(posMouse);
+
             break;
         }
     }
@@ -137,15 +138,16 @@ void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
    if(listUnits.empty() && unitCount==0)
    {   roundT.countDown(dT);
        if(roundT.timeSIsZero()==true)
-     {
-       unitCount=15;
+     {  lv++;
+       unitCount=15+lv;
        roundT.resetToMax();
+
+
      }
    }
    if(unitCount>0 && spawnT.timeSIsZero())
    {
        addUnit(renderer,level.getRanSpawnerLocation());
-       if(mix_chunkSpawnUnit!=nullptr) Mix_PlayChannel(-1,mix_chunkSpawnUnit,0);
        unitCount--;
       spawnT.resetToMax();
    }
@@ -223,9 +225,13 @@ void Game::draw(SDL_Renderer* renderer) {
 
 
 void Game::addUnit(SDL_Renderer* renderer, Vector2D posMouse) {
-    listUnits.push_back(std:: make_shared<Unit>(renderer, posMouse));
-    //create shared ptr
+    auto unitPtr = std::make_shared<Unit>(renderer, posMouse);
+
+    unitPtr->getStrongerUnit(lv);
+    listUnits.push_back(unitPtr);
+     //create shared ptr
 }
+
 
 void Game ::addTurret(SDL_Renderer* renderer, Vector2D posMouse)
 {

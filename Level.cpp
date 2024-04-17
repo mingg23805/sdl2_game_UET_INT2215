@@ -46,9 +46,6 @@ void Level::draw(SDL_Renderer* renderer, int tileSize) {
 
 
 
-  /* for (int count = 0; count < listTiles.size(); count++)
-        drawTile(renderer, (count % tileCountX), (count / tileCountX), tileSize);
-*/
    for (int y = 0; y < tileCountY; y++) {
         for (int x = 0; x < tileCountX; x++) {
             if (getTileType(x,y)== Type::spawner) {
