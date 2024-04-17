@@ -47,6 +47,8 @@ private:
     Timer spawnT ,roundT;
 
     int unitCount=0;
+
+    Mix_Chunk* mix_chunkSpawnUnit=nullptr;
 	SDL_Texture* textureOverlay = nullptr;
 	bool overlayVisible = true;
 };
