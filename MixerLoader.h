@@ -1,14 +1,16 @@
 #pragma once
 #include<string>
-#include<SDL_mixer.h>
-#include<bits/stdc++.h>
+#include <windows.h>
+#include<mmsystem.h>
+#include <vector>
+#include <algorithm>
 
 class MixerLoader
 {
     public:
-  static  Mix_Chunk* loadMix(std::string filename);
+  static std::string loadMix(std::string filename);
    static void deallocateMix();
 
     private:
-  static std::unordered_map<std::string, Mix_Chunk*> umapMixLoaded   ;
+  static std::vector<std::string> umapMixLoaded   ;
 };

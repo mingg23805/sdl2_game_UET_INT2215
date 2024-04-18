@@ -11,7 +11,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
     if (window != nullptr && renderer != nullptr) {
 
         textureOverlay = TextureLoader::loadTexture(renderer, "Overlay.bmp");
-         mix_chunkSpawnUnit=MixerLoader::loadMix("1.wav");
+         mix_chunkSpawnUnit=MixerLoader::loadMix("2.wav").c_str();
 
         auto time1 = std::chrono::system_clock::now();
         auto time2 = std::chrono::system_clock::now();
@@ -40,6 +40,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 Game::~Game() {
     TextureLoader::deallocateTextures();
     MixerLoader::deallocateMix();
+    lv=0;
 }
 
 
@@ -148,6 +149,8 @@ void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
    if(unitCount>0 && spawnT.timeSIsZero())
    {
        addUnit(renderer,level.getRanSpawnerLocation());
+
+        PlaySound(mix_chunkSpawnUnit,NULL, SND_FILENAME | SND_ASYNC);
        unitCount--;
       spawnT.resetToMax();
    }

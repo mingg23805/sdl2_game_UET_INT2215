@@ -6,8 +6,9 @@
 #include"timer.h"
 #include"turret.h"
 #include"projectile.h"
-#include"MixerLoader.h"
 
+#include <windows.h>
+#include<mmsystem.h>
 class Game
 {
 private:
@@ -47,9 +48,9 @@ private:
     Timer spawnT ,roundT;
 
     int unitCount=0;
-    int lv=1;
+    int lv=0;
 
-    Mix_Chunk* mix_chunkSpawnUnit=nullptr;
+    LPCSTR  mix_chunkSpawnUnit;
 	SDL_Texture* textureOverlay = nullptr;
 	bool overlayVisible = true;
 };

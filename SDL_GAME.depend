@@ -49,7 +49,7 @@
 1712588547 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\enemy.h
 	"game.h"
 
-1713366229 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
+1713432551 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
 	<bits/stdc++.h>
 	<SDL.h>
 	"Unit.h"
@@ -57,20 +57,22 @@
 	"timer.h"
 	"turret.h"
 	"projectile.h"
-	"MixerLoader.h"
+	<windows.h>
+	<mmsystem.h>
 
 1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\sdl_u.h
 	<bits/stdc++.h>
 	<SDL.h>
 	<SDL_image.h>
 
-1713362824 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
+1713433754 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
 	"Game.h"
 
-1713361971 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
+1713431163 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
 	<iostream>
 	<SDL.h>
 	"Game.h"
+	<SDL_mixer.h>
 
 1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\menu.h
 	<string>
@@ -150,10 +152,10 @@
 1712767865 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\timer.cpp
 	"timer.h"
 
-1713361846 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.cpp
+1713433190 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.cpp
 	"turret.h"
 
-1713324549 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.h
+1713432505 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.h
 	<SDL.h>
 	<memory>
 	"TextureLoader.h"
@@ -162,7 +164,9 @@
 	"Unit.h"
 	"timer.h"
 	"MixerLoader.h"
-	<bits/stdc++.h>
+	<string>
+	<windows.h>
+	<mmsystem.h>
 
 1713194238 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\projectile.h
 	<SDL.h>
@@ -175,11 +179,13 @@
 1713259481 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\projectile.cpp
 	"projectile.h"
 
-1713277898 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\mixerloader.h
+1713431887 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\mixerloader.h
 	<string>
-	<SDL_mixer.h>
-	<bits/stdc++.h>
+	<windows.h>
+	<mmsystem.h>
+	<vector>
+	<algorithm>
 
-1713359078 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\mixerloader.cpp
+1713431980 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\mixerloader.cpp
 	"MixerLoader.h"
 
