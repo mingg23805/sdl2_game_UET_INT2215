@@ -2,16 +2,15 @@
 #include "Game.h"
 
 
-const float Unit::speed = 1.5f;
+
 const float Unit::size = 0.48f;
 
 
 
 
 Unit::Unit(SDL_Renderer* renderer, Vector2D setPos) :
-	pos(setPos),timeJustHurt(0.25) {
+	pos(setPos),timeJustHurt(0.25)  {
 	texture = TextureLoader::loadTexture(renderer, "Unit.bmp");
-
 }
 bool Unit::checkALive()
 {
@@ -21,11 +20,7 @@ Vector2D Unit::getPos()
 {
     return pos;
 }
-void Unit:: getStrongerUnit(int lv)
-{
-    maxHp=2+lv;
-    currentHp=maxHp;
-}
+
 void Unit::update(float dT, Level& level, std::vector<std::shared_ptr <Unit> >& listUnits)
 {   timeJustHurt.countDown(dT);
 

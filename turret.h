@@ -8,9 +8,6 @@
 #include"timer.h"
 #include"MixerLoader.h"
 
-#include<string>
-#include <windows.h>
-#include<mmsystem.h>
 
 class Turret
 { private:
@@ -20,7 +17,8 @@ class Turret
 
     SDL_Texture *textureTurretOn=nullptr,
                 *textureTurretUnder=nullptr;
-             LPCSTR  mix_chunkShoot ;
+  //  Mix_Chunk* mix_ChunkShoot = nullptr;
+
     std::weak_ptr<Unit> unitTarget;
 
       bool updateAngle(float dT);
@@ -41,5 +39,6 @@ class Turret
                         int tileSize);
     bool checkOnTile(int x,int y);
     	static const float size;
+
 
 };

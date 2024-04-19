@@ -3,7 +3,7 @@
 #include <SDL.h>
 #include "Vector2D.h"
 #include "Level.h"
-#include "TextureLoader.h"
+//#include "TextureLoader.h"
 #include <memory>
 #include"timer.h"
 class Game;
@@ -20,14 +20,20 @@ public:
     bool checkALive();
     Vector2D getPos();
     void hploss(int dmg);
-    void getStrongerUnit(int lv);
-    int maxHp;
-    int currentHp;
+
+    void getStrongerUnit(int &lv)
+    {
+        this->maxHp=2+lv;
+        this->speed= 0.8f+ (float)(lv) * (0.5f);
+        this->currentHp=maxHp;
+    }
 
 private:
 	Vector2D pos;
      Timer timeJustHurt;
-	static const float speed;
+     int maxHp;
+     int currentHp;
+     float speed;
 	static const float size;
 	SDL_Texture* texture = nullptr;
 };

@@ -1,6 +1,6 @@
 #include"projectile.h"
 const float Projectile::speed=10,Projectile::size=0.2,
-            Projectile::distanceTravelMax=5;//= turretRange
+            Projectile::distanceTravelMax=5.0f;//= turretRange
 
 Projectile::Projectile(SDL_Renderer* renderer,Vector2D setPos, Vector2D setDirectionNormal) :
     pos(setPos) ,directionNormal(setDirectionNormal)
@@ -11,12 +11,11 @@ Projectile::Projectile(SDL_Renderer* renderer,Vector2D setPos, Vector2D setDirec
 void Projectile:: update(float dT,std::vector<std::shared_ptr<Unit>>& listUnits)
 {         float distanceMove=speed*dT;
          pos+=directionNormal*distanceMove;
+
          distanceTraveled+=distanceMove;
 
-         if(distanceTraveled>=distanceTravelMax)
-         {
-             collision=true;
-         }
+         if(distanceTraveled>=distanceTravelMax) collision=true;
+
          checkCollision(listUnits);
 }
 bool Projectile::getCollison()
@@ -28,7 +27,7 @@ void Projectile::checkCollision(std::vector<std::shared_ptr<Unit>>& listUnits)
 {
   if(collision==false)
   {
-      for(int i=0;i<=listUnits.size();i++)
+      for(int i=0;i<=listUnits.size()&& collision==false;i++)
       {
           auto& selcectedUnit=listUnits[i];
           if(selcectedUnit!= nullptr && selcectedUnit->checkOverlap(pos,size))
@@ -36,7 +35,6 @@ void Projectile::checkCollision(std::vector<std::shared_ptr<Unit>>& listUnits)
               selcectedUnit->hploss(1);
               collision=true;
           }
-          if(collision) break;
       }
 
   }

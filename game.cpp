@@ -10,8 +10,9 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 
     if (window != nullptr && renderer != nullptr) {
 
+
         textureOverlay = TextureLoader::loadTexture(renderer, "Overlay.bmp");
-         mix_chunkSpawnUnit=MixerLoader::loadMix("2.wav").c_str();
+      //  mix_chunkSpawnUnit= SoundLoader::loadSound("Data/Sounds/shoot.ogg");
 
         auto time1 = std::chrono::system_clock::now();
         auto time2 = std::chrono::system_clock::now();
@@ -39,8 +40,8 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 
 Game::~Game() {
     TextureLoader::deallocateTextures();
-    MixerLoader::deallocateMix();
-    lv=0;
+   // lv=0;
+   SoundLoader::deallocateSounds();
 }
 
 
@@ -129,6 +130,8 @@ void Game::update(float dT,SDL_Renderer *renderer) {
      updateUnits(dT);
     for(auto&selectedTurret : listTurrets)
       selectedTurret.update(dT,listUnits,renderer,listProjectiles );
+
+
    updateProjectiles(dT);
 
       updateSpawnUnits(renderer,dT);
@@ -140,7 +143,7 @@ void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
    {   roundT.countDown(dT);
        if(roundT.timeSIsZero()==true)
      {  lv++;
-       unitCount=15+lv;
+       unitCount=15;
        roundT.resetToMax();
 
 
@@ -149,11 +152,14 @@ void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
    if(unitCount>0 && spawnT.timeSIsZero())
    {
        addUnit(renderer,level.getRanSpawnerLocation());
-
-        PlaySound(mix_chunkSpawnUnit,NULL, SND_FILENAME | SND_ASYNC);
        unitCount--;
-      spawnT.resetToMax();
+
+        if ( mix_chunkSpawnUnit != nullptr)
+            Mix_PlayChannel(-1, mix_chunkSpawnUnit, 0);
+
+        spawnT.resetToMax();
    }
+
 }
 void Game::updateUnits(float dT)
 {
@@ -164,6 +170,7 @@ void Game::updateUnits(float dT)
         if(*(it)!=nullptr)
         {
           (*it)->update(dT,level,listUnits);
+
            if((*it) -> checkALive()==false )
           {
            it=listUnits.erase(it);
@@ -228,12 +235,13 @@ void Game::draw(SDL_Renderer* renderer) {
 
 
 void Game::addUnit(SDL_Renderer* renderer, Vector2D posMouse) {
-    auto unitPtr = std::make_shared<Unit>(renderer, posMouse);
+      std::shared_ptr<Unit> newUnit = std::make_shared<Unit>(renderer, posMouse);
 
-    unitPtr->getStrongerUnit(lv);
-    listUnits.push_back(unitPtr);
-     //create shared ptr
+    newUnit->getStrongerUnit(lv);
+
+    listUnits.push_back(newUnit);
 }
+
 
 
 void Game ::addTurret(SDL_Renderer* renderer, Vector2D posMouse)

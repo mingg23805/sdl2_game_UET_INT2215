@@ -1,33 +1,43 @@
 #include"MixerLoader.h"
- std::vector<std::string> MixerLoader::umapMixLoaded   ;
-std::string MixerLoader::loadMix(std::string filename)
-{  if(filename!="")
-    {auto found =std::find(umapMixLoaded.begin(),umapMixLoaded.end(),
-                           filename);
+ std::unordered_map<char*, Mix_Chunk*> SoundLoader::umapSoundsLoaded;
 
-      if(found!=umapMixLoaded.end())
-       {
-          int index= std::distance(umapMixLoaded.begin(),found);
-        return umapMixLoaded[index];
-       }
-      else{
-        std::string filepath="Data/Sounds/"+filename;
-             umapMixLoaded.push_back(filepath);
-             return filepath;
+
+Mix_Chunk* SoundLoader::loadSound(char* filename) {
+    if (filename != "") {
+        auto found = umapSoundsLoaded.find(filename);
+
+        if (found != umapSoundsLoaded.end()) {
+            return found->second;
+        }
+        else {
+
+            Mix_Chunk* mix_Chunk = Mix_LoadWAV(filename);
+            if (mix_Chunk != nullptr) {
+
+
+                umapSoundsLoaded[filename] = mix_Chunk;
+
+                return mix_Chunk;
             }
-         }
-}
-
-
-void MixerLoader::deallocateMix()
-{
-         PlaySound(NULL, NULL, 0);
-    while(umapMixLoaded.empty()==false)
-    {
-        auto it = umapMixLoaded.begin();
-       umapMixLoaded.erase(it);
-
-
+        }
     }
 
+    return nullptr;
 }
+
+
+
+void SoundLoader::deallocateSounds() {
+
+    Mix_HaltChannel(-1);
+
+    while (umapSoundsLoaded.empty() == false) {
+        auto it = umapSoundsLoaded.begin();
+        if (it->second != nullptr)
+            Mix_FreeChunk(it->second);
+
+        umapSoundsLoaded.erase(it);
+    }
+}
+
+

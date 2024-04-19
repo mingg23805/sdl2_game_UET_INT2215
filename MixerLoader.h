@@ -1,16 +1,17 @@
 #pragma once
-#include<string>
-#include <windows.h>
-#include<mmsystem.h>
-#include <vector>
-#include <algorithm>
+#include <string>
+#include <unordered_map>
+#include <SDL_mixer.h>
 
-class MixerLoader
+
+
+class SoundLoader
 {
-    public:
-  static std::string loadMix(std::string filename);
-   static void deallocateMix();
+public:
+	static Mix_Chunk* loadSound(char* filename);
+	static void deallocateSounds();
 
-    private:
-  static std::vector<std::string> umapMixLoaded   ;
+
+private:
+	static std::unordered_map<char*, Mix_Chunk*> umapSoundsLoaded;
 };

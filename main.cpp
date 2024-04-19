@@ -4,24 +4,21 @@
 #include<SDL_mixer.h>
 
 
-#pragma comment(lib, "winmm.lib")
-
 int main(int argc, char* args[]) {
 
 	srand(time(NULL));
 
-	if (SDL_Init(SDL_INIT_VIDEO |SDL_INIT_AUDIO ) < 0 ) {
-		std::cout << "Error: Couldn't initialize SDL = " << SDL_GetError() << std::endl;
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO ) < 0 ) {
+		std::cerr << "Error: Couldn't initialize SDL = " << SDL_GetError() << std::endl;
 		return 1;
 	}
 	else {
 
-	   bool isSDLMixerLoaded = (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048)  == 0);
-      if (!isSDLMixerLoaded) {
-     std::cout << "Error: Couldn't initialize Mix_OpenAudio = " << Mix_GetError() << std::endl;
-     return 1;}
-
-
+        if (  Mix_OpenAudio(44100, AUDIO_S16SYS, 2,2048) < 0) {
+        std::cerr << "SDL_Mixer could not initialize! SDL_Mixer Error: " << Mix_GetError() << std::endl;
+        SDL_Quit();
+        return -1;
+    }
 		SDL_Window* window = SDL_CreateWindow("Tower Base Defense",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,1200, 720, 0);
 		if (window == nullptr) {
@@ -59,9 +56,7 @@ int main(int argc, char* args[]) {
 		}
 
 
-       if (isSDLMixerLoaded) {
 			Mix_CloseAudio();
-			Mix_Quit();}
 		SDL_Quit();
 	}
 	return 0;

@@ -6,9 +6,7 @@
 #include"timer.h"
 #include"turret.h"
 #include"projectile.h"
-
-#include <windows.h>
-#include<mmsystem.h>
+#include"MixerLoader.h"
 class Game
 {
 private:
@@ -47,10 +45,10 @@ private:
     std::vector<Projectile> listProjectiles;
     Timer spawnT ,roundT;
 
-    int unitCount=0;
+    int unitCount;
     int lv=0;
 
-    LPCSTR  mix_chunkSpawnUnit;
+    Mix_Chunk* mix_chunkSpawnUnit=nullptr;
 	SDL_Texture* textureOverlay = nullptr;
 	bool overlayVisible = true;
 };
