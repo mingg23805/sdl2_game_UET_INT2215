@@ -41,7 +41,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 Game::~Game() {
     TextureLoader::deallocateTextures();
    // lv=0;
-   SoundLoader::deallocateSounds();
+  // SoundLoader::deallocateSounds();
 }
 
 
@@ -106,7 +106,8 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
             case PlacementMode::turret:
 
                 if (mouseDownThisFrame&&
-                    level.isTileWall((int)posMouse.x, (int)posMouse.y ) )
+                    level.isTileWall((int)posMouse.x, (int)posMouse.y )&&
+                     isTurretAt( posMouse.x, posMouse.y )==false  )
                     addTurret(renderer,posMouse);
                 break;
             }
@@ -135,6 +136,8 @@ void Game::update(float dT,SDL_Renderer *renderer) {
    updateProjectiles(dT);
 
       updateSpawnUnits(renderer,dT);
+
+      if(mainTowerHp<=0) std::cout<<"youLose";
 }
 void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
 {
@@ -154,8 +157,8 @@ void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
        addUnit(renderer,level.getRanSpawnerLocation());
        unitCount--;
 
-        if ( mix_chunkSpawnUnit != nullptr)
-            Mix_PlayChannel(-1, mix_chunkSpawnUnit, 0);
+        //if ( mix_chunkSpawnUnit != nullptr)
+        //    Mix_PlayChannel(-1, mix_chunkSpawnUnit, 0);
 
         spawnT.resetToMax();
    }
@@ -172,7 +175,7 @@ void Game::updateUnits(float dT)
           (*it)->update(dT,level,listUnits);
 
            if((*it) -> checkALive()==false )
-          {
+          { if( (*it)->hasReachedTarget(level) ) mainTowerHp--;
            it=listUnits.erase(it);
            increase=false;
           }
@@ -269,5 +272,18 @@ void Game ::removeTurretsAtMousePosition(Vector2D posMouse)
         else it++;
 
     }
+
+}
+bool  Game:: isTurretAt(float x ,float y )
+{
+     for ( Turret& turret : listTurrets) {
+
+            if (turret.checkOnTile((int) (x) ,(int) (y) )) {
+
+                return true;
+            }
+        }
+
+        return false;
 
 }

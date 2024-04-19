@@ -20,7 +20,7 @@ public:
     bool checkALive();
     Vector2D getPos();
     void hploss(int dmg);
-
+   bool hasReachedTarget(Level& level);
     void getStrongerUnit(int &lv)
     {
         this->maxHp=2+lv;
@@ -29,6 +29,8 @@ public:
     }
 
 private:
+
+
 	Vector2D pos;
      Timer timeJustHurt;
      int maxHp;

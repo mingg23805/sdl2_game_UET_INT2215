@@ -49,7 +49,7 @@
 1712588547 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\enemy.h
 	"game.h"
 
-1713541293 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
+1713548481 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
 	<bits/stdc++.h>
 	<SDL.h>
 	"Unit.h"
@@ -57,21 +57,19 @@
 	"timer.h"
 	"turret.h"
 	"projectile.h"
-	"MixerLoader.h"
 
 1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\sdl_u.h
 	<bits/stdc++.h>
 	<SDL.h>
 	<SDL_image.h>
 
-1713541380 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
+1713547684 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
 	"Game.h"
 
-1713541480 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
+1713546187 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
 	<iostream>
 	<SDL.h>
 	"Game.h"
-	<SDL_mixer.h>
 
 1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\menu.h
 	<string>
@@ -107,7 +105,7 @@
 
 1712647081 source:d:\test\gamee\main.c
 
-1713540222 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.h
+1713548861 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.h
 	<vector>
 	<SDL.h>
 	"Vector2D.h"
@@ -137,7 +135,7 @@
 1712668462 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\textureloader.cpp
 	"TextureLoader.h"
 
-1713539989 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.cpp
+1713548570 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.cpp
 	"Unit.h"
 	"Game.h"
 
@@ -153,7 +151,7 @@
 1713537835 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.cpp
 	"turret.h"
 
-1713537825 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.h
+1713548570 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.h
 	<SDL.h>
 	<memory>
 	"TextureLoader.h"
@@ -161,7 +159,6 @@
 	"projectile.h"
 	"Unit.h"
 	"timer.h"
-	"MixerLoader.h"
 
 1713194238 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\projectile.h
 	<SDL.h>

@@ -20,14 +20,18 @@ Vector2D Unit::getPos()
 {
     return pos;
 }
+bool Unit::hasReachedTarget(Level& level)
+{
+    float distanceToTarget = (level.getTargetPos() - pos).magnitude();
 
+     if(distanceToTarget<=sqrt(2)/2) return true;
+     return false;
+}
 void Unit::update(float dT, Level& level, std::vector<std::shared_ptr <Unit> >& listUnits)
 {   timeJustHurt.countDown(dT);
 
 	float distanceToTarget = (level.getTargetPos() - pos).magnitude();
-
-     if(distanceToTarget<=sqrt(2)/2)
-        currentHp=0;
+        if(hasReachedTarget(level)) currentHp=0;
 
 	float distanceMove = speed * dT;
 	if (distanceMove > distanceToTarget)

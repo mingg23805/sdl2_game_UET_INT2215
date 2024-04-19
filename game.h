@@ -6,7 +6,7 @@
 #include"timer.h"
 #include"turret.h"
 #include"projectile.h"
-#include"MixerLoader.h"
+//#include"MixerLoader.h"
 class Game
 {
 private:
@@ -23,7 +23,7 @@ public:
 
 private:
 	void processEvents(SDL_Renderer* renderer, bool& running);
-
+    int mainTowerHp=20;
 	void update(float dT,SDL_Renderer *renderer);
 	void updateSpawnUnits(SDL_Renderer *renderer ,float dT);
 	void updateUnits(float dT);
@@ -35,6 +35,7 @@ private:
 	void removeUnitsAtMousePosition(Vector2D posMouse);
     void removeTurretsAtMousePosition(Vector2D posMouse);
 
+    bool  isTurretAt(float x ,float y );
 	int mouseDownStatus = 0;
 
 	const int tileSize = 48;
@@ -48,7 +49,7 @@ private:
     int unitCount;
     int lv=0;
 
-    Mix_Chunk* mix_chunkSpawnUnit=nullptr;
+  //  Mix_Chunk* mix_chunkSpawnUnit=nullptr;
 	SDL_Texture* textureOverlay = nullptr;
 	bool overlayVisible = true;
 };
