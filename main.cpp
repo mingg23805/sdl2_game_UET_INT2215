@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "Game.h"
 //#include<SDL_mixer.h>
+#include<SDL_ttf.h>
 
 
 int main(int argc, char* args[]) {
@@ -19,6 +20,11 @@ int main(int argc, char* args[]) {
 //SDL_Quit();
     //    return -1;
    // }
+          if (TTF_Init() == -1) {
+        std::cerr << "TTF_Init Error: " << TTF_GetError() << std::endl;
+        SDL_Quit();
+        return 1;
+    }
 		SDL_Window* window = SDL_CreateWindow("Tower Base Defense",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,1200, 720, 0);
 		if (window == nullptr) {
@@ -57,6 +63,7 @@ int main(int argc, char* args[]) {
 
 
 		//	Mix_CloseAudio();
+		TTF_Quit();
 		SDL_Quit();
 	}
 	return 0;

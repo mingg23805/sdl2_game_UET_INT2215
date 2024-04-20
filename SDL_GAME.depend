@@ -49,7 +49,7 @@
 1712588547 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\enemy.h
 	"game.h"
 
-1713548481 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
+1713594666 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
 	<bits/stdc++.h>
 	<SDL.h>
 	"Unit.h"
@@ -57,19 +57,21 @@
 	"timer.h"
 	"turret.h"
 	"projectile.h"
+	<SDL_ttf.h>
 
 1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\sdl_u.h
 	<bits/stdc++.h>
 	<SDL.h>
 	<SDL_image.h>
 
-1713547684 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
+1713593517 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
 	"Game.h"
 
-1713546187 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
+1713592940 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
 	<iostream>
 	<SDL.h>
 	"Game.h"
+	<SDL_ttf.h>
 
 1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\menu.h
 	<string>

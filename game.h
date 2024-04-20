@@ -7,6 +7,7 @@
 #include"turret.h"
 #include"projectile.h"
 //#include"MixerLoader.h"
+#include<SDL_ttf.h>
 class Game
 {
 private:
@@ -15,7 +16,12 @@ private:
 		turret
 	} placementModeCurrent;
 
+TTF_Font* gameFont=nullptr;
+     SDL_Surface* gameOverSurface=nullptr;
+     SDL_Texture* gameOverTexture=nullptr;
+     SDL_Rect gameOverRect={0,0,0,0};
 
+  //  Mix_Chunk* mix_chunkSpawnUnit=nullptr;
 public:
 	Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight);
 	~Game();
@@ -31,7 +37,7 @@ private:
 	void draw(SDL_Renderer* renderer);
 	void addUnit(SDL_Renderer* renderer, Vector2D posMouse);
     void addTurret(SDL_Renderer* renderer, Vector2D posMouse);
-
+    bool isGameOver();
 	void removeUnitsAtMousePosition(Vector2D posMouse);
     void removeTurretsAtMousePosition(Vector2D posMouse);
 
@@ -49,7 +55,9 @@ private:
     int unitCount;
     int lv=0;
 
-  //  Mix_Chunk* mix_chunkSpawnUnit=nullptr;
 	SDL_Texture* textureOverlay = nullptr;
 	bool overlayVisible = true;
+
+
+
 };

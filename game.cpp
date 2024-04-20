@@ -5,7 +5,7 @@
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight) :
     placementModeCurrent(PlacementMode::wall),
     level(renderer, windowWidth / tileSize, windowHeight / tileSize) ,
-    spawnT(0.25f),roundT(5.0f)
+    spawnT(0.25f),roundT(1.0f)
     {
 
     if (window != nullptr && renderer != nullptr) {
@@ -13,6 +13,23 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 
         textureOverlay = TextureLoader::loadTexture(renderer, "Overlay.bmp");
       //  mix_chunkSpawnUnit= SoundLoader::loadSound("Data/Sounds/shoot.ogg");
+        gameFont = TTF_OpenFont("Data/Fonts/Warriatron3DStraight-OGGvp.otf", 200);
+
+         gameOverSurface = TTF_RenderText_Solid(gameFont,
+                                        "Game Over", {255, 0, 0});
+           gameOverTexture = SDL_CreateTextureFromSurface(renderer, gameOverSurface);
+
+          int GOtextWidth, GOtextHeight;
+        SDL_QueryTexture(gameOverTexture,
+                          nullptr, nullptr, &GOtextWidth, &GOtextHeight);
+        gameOverRect = { (windowWidth - GOtextWidth) / 2,
+                         (windowHeight - GOtextHeight) / 2,
+                          GOtextWidth,
+                          GOtextHeight };
+
+            SDL_FreeSurface(gameOverSurface);
+
+
 
         auto time1 = std::chrono::system_clock::now();
         auto time2 = std::chrono::system_clock::now();
@@ -28,10 +45,16 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 
             if (timeDeltaFloat >= dT) {
                 time1 = time2;
-
                 processEvents(renderer, running);
-                update(dT,renderer);
-                draw(renderer);
+                if (isGameOver()) {
+                  //running=false;
+                    SDL_RenderCopy(renderer, gameOverTexture,
+                                    nullptr, &gameOverRect);
+                       SDL_RenderPresent(renderer);
+
+                }
+                else {update(dT,renderer);
+                draw(renderer);}
             }
         }
     }
@@ -44,7 +67,10 @@ Game::~Game() {
   // SoundLoader::deallocateSounds();
 }
 
-
+bool Game::isGameOver()
+{
+    return mainTowerHp==0;
+}
 
 void Game::processEvents(SDL_Renderer* renderer, bool& running) {
     bool mouseDownThisFrame = false;
@@ -137,7 +163,6 @@ void Game::update(float dT,SDL_Renderer *renderer) {
 
       updateSpawnUnits(renderer,dT);
 
-      if(mainTowerHp<=0) std::cout<<"youLose";
 }
 void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
 {
@@ -179,6 +204,7 @@ void Game::updateUnits(float dT)
            it=listUnits.erase(it);
            increase=false;
           }
+          if(mainTowerHp<=0) {mainTowerHp=0;break;}
         }
         if(increase)
             it++;
