@@ -26,7 +26,7 @@ int main(int argc, char* args[]) {
         return 1;
     }
 		SDL_Window* window = SDL_CreateWindow("Tower Base Defense",
-			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,1200, 720, 0);
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,1200, 900, 0);
 		if (window == nullptr) {
 			std::cout << "Error: Couldn't create window = " << SDL_GetError() << std::endl;
 			return 1;

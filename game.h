@@ -16,20 +16,31 @@ private:
 		turret
 	} placementModeCurrent;
 
-TTF_Font* gameFont=nullptr;
+
+     TTF_Font* gameFont=nullptr;
+
      SDL_Surface* gameOverSurface=nullptr;
      SDL_Texture* gameOverTexture=nullptr;
      SDL_Rect gameOverRect={0,0,0,0};
+
+      SDL_Surface* pointSurface=nullptr;
+     SDL_Texture* pointTexture=nullptr;
+     SDL_Rect pointRect={0,0,0,0};
+
+      SDL_Surface* lvlSurface=nullptr;
+     SDL_Texture* lvlTexture=nullptr;
+     SDL_Rect lvlRect={0,0,0,0};
 
   //  Mix_Chunk* mix_chunkSpawnUnit=nullptr;
 public:
 	Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight);
 	~Game();
-
+     int mainTowerHp=20;
+     int point=0;
 
 private:
 	void processEvents(SDL_Renderer* renderer, bool& running);
-    int mainTowerHp=20;
+
 	void update(float dT,SDL_Renderer *renderer);
 	void updateSpawnUnits(SDL_Renderer *renderer ,float dT);
 	void updateUnits(float dT);

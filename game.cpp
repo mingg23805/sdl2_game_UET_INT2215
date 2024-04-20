@@ -5,29 +5,22 @@
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight) :
     placementModeCurrent(PlacementMode::wall),
     level(renderer, windowWidth / tileSize, windowHeight / tileSize) ,
-    spawnT(0.25f),roundT(1.0f)
+    spawnT(0.25f),roundT(5.0f)
     {
 
     if (window != nullptr && renderer != nullptr) {
-
 
         textureOverlay = TextureLoader::loadTexture(renderer, "Overlay.bmp");
       //  mix_chunkSpawnUnit= SoundLoader::loadSound("Data/Sounds/shoot.ogg");
         gameFont = TTF_OpenFont("Data/Fonts/Warriatron3DStraight-OGGvp.otf", 200);
 
+
+
          gameOverSurface = TTF_RenderText_Solid(gameFont,
                                         "Game Over", {255, 0, 0});
            gameOverTexture = SDL_CreateTextureFromSurface(renderer, gameOverSurface);
 
-          int GOtextWidth, GOtextHeight;
-        SDL_QueryTexture(gameOverTexture,
-                          nullptr, nullptr, &GOtextWidth, &GOtextHeight);
-        gameOverRect = { (windowWidth - GOtextWidth) / 2,
-                         (windowHeight - GOtextHeight) / 2,
-                          GOtextWidth,
-                          GOtextHeight };
 
-            SDL_FreeSurface(gameOverSurface);
 
 
 
@@ -46,15 +39,14 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
             if (timeDeltaFloat >= dT) {
                 time1 = time2;
                 processEvents(renderer, running);
-                if (isGameOver()) {
-                  //running=false;
-                    SDL_RenderCopy(renderer, gameOverTexture,
-                                    nullptr, &gameOverRect);
-                       SDL_RenderPresent(renderer);
+                if (isGameOver()==false) {
+                    update(dT,renderer);
 
                 }
-                else {update(dT,renderer);
-                draw(renderer);}
+
+
+                draw(renderer);
+
             }
         }
     }
@@ -121,7 +113,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
 
     Vector2D posMouse((float)mouseX / tileSize, (float)mouseY / tileSize);
 
-    if (mouseDownStatus > 0) {
+    if (mouseDownStatus > 0 &&isGameOver()==false) {
         switch (mouseDownStatus) {
         case SDL_BUTTON_LEFT:
             switch (placementModeCurrent) {
@@ -201,6 +193,7 @@ void Game::updateUnits(float dT)
 
            if((*it) -> checkALive()==false )
           { if( (*it)->hasReachedTarget(level) ) mainTowerHp--;
+            else point++;
            it=listUnits.erase(it);
            increase=false;
           }
@@ -229,12 +222,35 @@ void Game::updateProjectiles(float dT)
 
 }
 void Game::draw(SDL_Renderer* renderer) {
+      SDL_RenderClear(renderer);
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+  if(isGameOver())
+  {
+         int GOtextWidth, GOtextHeight;
+        SDL_QueryTexture(gameOverTexture,
+                          nullptr, nullptr, &GOtextWidth, &GOtextHeight);
+        gameOverRect = { (1200 - GOtextWidth) / 2,
+                         (720 - GOtextHeight) / 2,
+                          GOtextWidth,
+                          GOtextHeight };
 
-    SDL_RenderClear(renderer);
+            //SDL_FreeSurface(gameOverSurface);
+
+        SDL_RenderCopy(renderer, gameOverTexture,
+                                    nullptr, &gameOverRect);
+
+  }
 
 
+       SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255);
+        SDL_Rect Menurect = { 0, 720, 1200, 180 };
+         SDL_RenderFillRect(renderer, &Menurect);
+
+
+
+          SDL_Rect lvlRect={50,720+50,300,80};
+         SDL_RenderCopy(renderer,lvlTexture,NULL,&lvlRect);
 
     level.draw(renderer, tileSize);
 
