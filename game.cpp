@@ -16,9 +16,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 
 
 
-         gameOverSurface = TTF_RenderText_Solid(gameFont,
-                                        "Game Over", {255, 0, 0});
-           gameOverTexture = SDL_CreateTextureFromSurface(renderer, gameOverSurface);
+
 
 
 
@@ -224,33 +222,19 @@ void Game::updateProjectiles(float dT)
 void Game::draw(SDL_Renderer* renderer) {
       SDL_RenderClear(renderer);
 
-    //SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-  if(isGameOver())
-  {
-         int GOtextWidth, GOtextHeight;
-        SDL_QueryTexture(gameOverTexture,
-                          nullptr, nullptr, &GOtextWidth, &GOtextHeight);
-        gameOverRect = { (1200 - GOtextWidth) / 2,
-                         (720 - GOtextHeight) / 2,
-                          GOtextWidth,
-                          GOtextHeight };
-
-            //SDL_FreeSurface(gameOverSurface);
-
-        SDL_RenderCopy(renderer, gameOverTexture,
-                                    nullptr, &gameOverRect);
-
-  }
 
 
-       SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255);
+
+
+
+       SDL_SetRenderDrawColor(renderer,255, 255, 255, 255);
         SDL_Rect Menurect = { 0, 720, 1200, 180 };
-         SDL_RenderFillRect(renderer, &Menurect);
-
-
-
-          SDL_Rect lvlRect={50,720+50,300,80};
+         SDL_RenderFillRect(renderer, &Menurect)'
+         SDL_Rect lvlRect={50,720+50,300,80};
          SDL_RenderCopy(renderer,lvlTexture,NULL,&lvlRect);
+
+
+
 
     level.draw(renderer, tileSize);
 
@@ -274,6 +258,24 @@ void Game::draw(SDL_Renderer* renderer) {
         SDL_RenderCopy(renderer, textureOverlay, NULL, &rect);
     }
 
+          if(isGameOver()==true)
+  {
+
+
+        gameOverSurface = TTF_RenderText_Solid(gameFont,
+        "Game Over", {255, 0, 0});
+           gameOverTexture = SDL_CreateTextureFromSurface(renderer, gameOverSurface);
+         int GOtextWidth, GOtextHeight;
+        SDL_QueryTexture(gameOverTexture,
+                          nullptr, nullptr, &GOtextWidth, &GOtextHeight);
+        gameOverRect = { (1200 - GOtextWidth) / 2,
+                         (720 - GOtextHeight) / 2,
+                          GOtextWidth,
+                          GOtextHeight };
+
+            SDL_FreeSurface(gameOverSurface);
+        SDL_RenderCopy(renderer, gameOverTexture,nullptr, &gameOverRect);
+  }
     SDL_RenderPresent(renderer);
 }
 
