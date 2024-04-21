@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SDL.h>
 #include "Game.h"
-//#include<SDL_mixer.h>
+#include<SDL_mixer.h>
 #include<SDL_ttf.h>
 
 
@@ -15,11 +15,11 @@ int main(int argc, char* args[]) {
 	}
 	else {
 
-       // if (  Mix_OpenAudio(44100, AUDIO_S16SYS, 2,2048) < 0) {
-        //std::cerr << "SDL_Mixer could not initialize! SDL_Mixer Error: " << Mix_GetError() << std::endl;
-//SDL_Quit();
-    //    return -1;
-   // }
+        if (  Mix_OpenAudio(44100, AUDIO_S16SYS, 2,2048) < 0) {
+        std::cerr << "SDL_Mixer could not initialize! SDL_Mixer Error: " << Mix_GetError() << std::endl;
+       SDL_Quit();
+       return -1;
+    }
           if (TTF_Init() == -1) {
         std::cerr << "TTF_Init Error: " << TTF_GetError() << std::endl;
         SDL_Quit();
@@ -62,7 +62,7 @@ int main(int argc, char* args[]) {
 		}
 
 
-		//	Mix_CloseAudio();
+      Mix_CloseAudio();
 		TTF_Quit();
 		SDL_Quit();
 	}

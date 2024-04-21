@@ -6,7 +6,7 @@
 #include"projectile.h"
 #include"Unit.h"
 #include"timer.h"
-//#include"MixerLoader.h"
+#include"MixerLoader.h"
 
 
 class Turret
@@ -17,7 +17,7 @@ class Turret
 
     SDL_Texture *textureTurretOn=nullptr,
                 *textureTurretUnder=nullptr;
-  //  Mix_Chunk* mix_ChunkShoot = nullptr;
+    Mix_Chunk* mix_ChunkShoot = nullptr;
 
     std::weak_ptr<Unit> unitTarget;
 

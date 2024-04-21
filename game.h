@@ -6,7 +6,7 @@
 #include"timer.h"
 #include"turret.h"
 #include"projectile.h"
-//#include"MixerLoader.h"
+#include"MixerLoader.h"
 #include"FontLoader.h"
 class Game
 {
@@ -31,7 +31,7 @@ private:
      SDL_Texture* lvlTexture=nullptr;
      SDL_Rect lvlRect={0,0,0,0};
 
-  //  Mix_Chunk* mix_chunkSpawnUnit=nullptr;
+    Mix_Chunk* mix_chunkSpawnUnit=nullptr;
 public:
 	Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight);
 	~Game();

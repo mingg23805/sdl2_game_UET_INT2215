@@ -41,7 +41,6 @@ public:
 	bool isMainTower(int x,int y);
 
 private:
-	void drawTile(SDL_Renderer* renderer, int x, int y, int tileSize);
 	void calculateFlowField();
 	void calculateDistances();
 	void calculateFlowDirections();
@@ -56,13 +55,5 @@ private:
 
 		*textureTileTarget = nullptr,
 		*textureTileEmpty = nullptr,
-		*textureTileArrowUp = nullptr,
-		*textureTileArrowUpRight = nullptr,
-		*textureTileArrowRight = nullptr,
-		*textureTileArrowDownRight = nullptr,
-		*textureTileArrowDown = nullptr,
-		*textureTileArrowDownLeft = nullptr,
-		*textureTileArrowLeft = nullptr,
-		*textureTileArrowUpLeft = nullptr,
 		*textureTileSpawner = nullptr;
 };

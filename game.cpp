@@ -11,7 +11,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
     if (window != nullptr && renderer != nullptr) {
 
         textureOverlay = TextureLoader::loadTexture(renderer, "Overlay.bmp");
-      //  mix_chunkSpawnUnit= SoundLoader::loadSound("Data/Sounds/shoot.ogg");
+        mix_chunkSpawnUnit= SoundLoader::loadSound("Data/Sounds/spawn.ogg");
         gameOFont = FontLoader::loadFont("Warriatron3DStraight-OGGvp.otf",200);
 
 
@@ -54,7 +54,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 Game::~Game() {
     TextureLoader::deallocateTextures();
    // lv=0;
-  // SoundLoader::deallocateSounds();
+   SoundLoader::deallocateSounds();
   FontLoader::deallocateFonts();
 }
 
@@ -179,8 +179,8 @@ void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
        addUnit(renderer,level.getRanSpawnerLocation());
        unitCount--;
 
-        //if ( mix_chunkSpawnUnit != nullptr)
-        //    Mix_PlayChannel(-1, mix_chunkSpawnUnit, 0);
+        if ( mix_chunkSpawnUnit != nullptr)
+           Mix_PlayChannel(-1, mix_chunkSpawnUnit, 0);
 
         spawnT.resetToMax();
    }

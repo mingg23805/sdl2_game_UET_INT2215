@@ -8,15 +8,6 @@ Level::Level(SDL_Renderer* renderer, int setTileCountX, int setTileCountY) :
     textureTileWall = TextureLoader::loadTexture(renderer, "Tile Wall.bmp");
     textureTileTarget = TextureLoader::loadTexture(renderer, "Tile Target.bmp");
     textureTileSpawner=TextureLoader::loadTexture(renderer,"Tile Spawner.bmp");
-    textureTileEmpty = TextureLoader::loadTexture(renderer, "Tile Empty.bmp");
-    textureTileArrowUp = TextureLoader::loadTexture(renderer, "Tile Arrow Up.bmp");
-    textureTileArrowUpRight = TextureLoader::loadTexture(renderer, "Tile Arrow Up Right.bmp");
-    textureTileArrowRight = TextureLoader::loadTexture(renderer, "Tile Arrow Right.bmp");
-    textureTileArrowDownRight = TextureLoader::loadTexture(renderer, "Tile Arrow Down Right.bmp");
-    textureTileArrowDown = TextureLoader::loadTexture(renderer, "Tile Arrow Down.bmp");
-    textureTileArrowDownLeft = TextureLoader::loadTexture(renderer, "Tile Arrow Down Left.bmp");
-    textureTileArrowLeft = TextureLoader::loadTexture(renderer, "Tile Arrow Left.bmp");
-    textureTileArrowUpLeft = TextureLoader::loadTexture(renderer, "Tile Arrow Up Left.bmp");
 
     size_t listTilesSize = (size_t)tileCountX * tileCountY;
     listTiles.assign(listTilesSize, Tile{});
@@ -65,44 +56,6 @@ void Level::draw(SDL_Renderer* renderer, int tileSize) {
                 SDL_RenderCopy(renderer, textureTileSpawner, NULL, &rect);
             }
         }
-    }
-}
-
-
-
-void Level::drawTile(SDL_Renderer* renderer, int x, int y, int tileSize) {
-    SDL_Texture* textureSelected = textureTileEmpty;
-
-
-    int index = x + y * tileCountX;
-    if (index > -1 && index < listTiles.size() &&
-        x > -1 && x < tileCountX &&
-        y > -1 && y < tileCountY) {
-        Tile& tileSelected = listTiles[index];
-
-
-        if (tileSelected.flowDirectionX == 0 && tileSelected.flowDirectionY == -1)
-            textureSelected = textureTileArrowUp;
-        else if (tileSelected.flowDirectionX == 1 && tileSelected.flowDirectionY == -1)
-            textureSelected = textureTileArrowUpRight;
-        else if (tileSelected.flowDirectionX == 1 && tileSelected.flowDirectionY == 0)
-            textureSelected = textureTileArrowRight;
-        else if (tileSelected.flowDirectionX == 1 && tileSelected.flowDirectionY == 1)
-            textureSelected = textureTileArrowDownRight;
-        else if (tileSelected.flowDirectionX == 0 && tileSelected.flowDirectionY == 1)
-            textureSelected = textureTileArrowDown;
-        else if (tileSelected.flowDirectionX == -1 && tileSelected.flowDirectionY == 1)
-            textureSelected = textureTileArrowDownLeft;
-        else if (tileSelected.flowDirectionX == -1 && tileSelected.flowDirectionY == 0)
-            textureSelected = textureTileArrowLeft;
-        else if (tileSelected.flowDirectionX == -1 && tileSelected.flowDirectionY == -1)
-            textureSelected = textureTileArrowUpLeft;
-
-    }
-
-    if (textureSelected != nullptr) {
-        SDL_Rect rect = { x * tileSize, y * tileSize, tileSize, tileSize };
-        SDL_RenderCopy(renderer, textureSelected, NULL, &rect);
     }
 }
 
