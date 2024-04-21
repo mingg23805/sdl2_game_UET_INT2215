@@ -49,7 +49,7 @@
 1712588547 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\enemy.h
 	"game.h"
 
-1713611900 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
+1713682498 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
 	<bits/stdc++.h>
 	<SDL.h>
 	"Unit.h"
@@ -57,14 +57,14 @@
 	"timer.h"
 	"turret.h"
 	"projectile.h"
-	<SDL_ttf.h>
+	"FontLoader.h"
 
 1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\sdl_u.h
 	<bits/stdc++.h>
 	<SDL.h>
 	<SDL_image.h>
 
-1713635043 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
+1713682453 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
 	"Game.h"
 
 1713609076 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
@@ -117,7 +117,7 @@
 1678099102 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\vector2d.h
 	<cmath>
 
-1713361971 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.h
+1713681238 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.h
 	<queue>
 	<vector>
 	<string>
@@ -140,7 +140,7 @@
 	"Unit.h"
 	"Game.h"
 
-1713333914 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.cpp
+1713681238 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\level.cpp
 	"Level.h"
 
 1712768224 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\timer.h
@@ -161,7 +161,7 @@
 	"Unit.h"
 	"timer.h"
 
-1713194238 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\projectile.h
+1713680174 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\projectile.h
 	<SDL.h>
 	"Vector2D.h"
 	<bits/stdc++.h>
@@ -169,7 +169,7 @@
 	"TextureLoader.h"
 	"Unit.h"
 
-1713539668 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\projectile.cpp
+1713680262 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\projectile.cpp
 	"projectile.h"
 
 1713533815 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\mixerloader.h
@@ -179,4 +179,13 @@
 
 1713535543 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\mixerloader.cpp
 	"MixerLoader.h"
+
+1713682453 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\fontloader.cpp
+	"FontLoader.h"
+
+1713681909 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\fontloader.h
+	<SDL.h>
+	<SDL_ttf.h>
+	<unordered_map>
+	<string>
 

@@ -32,12 +32,18 @@ void Projectile::checkCollision(std::vector<std::shared_ptr<Unit>>& listUnits)
           auto& selcectedUnit=listUnits[i];
           if(selcectedUnit!= nullptr && selcectedUnit->checkOverlap(pos,size))
           {
-              selcectedUnit->hploss(1);
+              selcectedUnit->hploss(getCriticalDMG(60));
               collision=true;
           }
       }
 
   }
+}
+int Projectile::getCriticalDMG(int critRate)
+{
+    int chancetogetCrit = rand() % 100 + 1;
+    if(critRate>=chancetogetCrit) return 3;
+    else return 1;
 }
 void Projectile::draw(SDL_Renderer*renderer ,int tileSize)
 {

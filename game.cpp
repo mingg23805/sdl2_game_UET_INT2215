@@ -12,7 +12,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 
         textureOverlay = TextureLoader::loadTexture(renderer, "Overlay.bmp");
       //  mix_chunkSpawnUnit= SoundLoader::loadSound("Data/Sounds/shoot.ogg");
-        gameFont = TTF_OpenFont("Data/Fonts/Warriatron3DStraight-OGGvp.otf", 200);
+        gameOFont = FontLoader::loadFont("Warriatron3DStraight-OGGvp.otf",200);
 
 
 
@@ -55,6 +55,7 @@ Game::~Game() {
     TextureLoader::deallocateTextures();
    // lv=0;
   // SoundLoader::deallocateSounds();
+  FontLoader::deallocateFonts();
 }
 
 bool Game::isGameOver()
@@ -116,8 +117,13 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
         case SDL_BUTTON_LEFT:
             switch (placementModeCurrent) {
             case PlacementMode::wall:
+                if(mouseDownThisFrame&& maxBlockcanBuild>0 &&
+                   level.isTileWall((int)posMouse.x, (int)posMouse.y )==false
+                   &&level.isMainTower( (int)posMouse.x, (int)posMouse.y )==false)
+                   {
+                       level.setTileWall((int)posMouse.x, (int)posMouse.y, true);
 
-                level.setTileWall((int)posMouse.x, (int)posMouse.y, true);
+                        maxBlockcanBuild--;}
                 break;
             case PlacementMode::turret:
 
@@ -162,6 +168,7 @@ void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
        if(roundT.timeSIsZero()==true)
      {  lv++;
        unitCount=15;
+       maxBlockcanBuild+=2;
        roundT.resetToMax();
 
 
@@ -229,7 +236,7 @@ void Game::draw(SDL_Renderer* renderer) {
 
        SDL_SetRenderDrawColor(renderer,255, 255, 255, 255);
         SDL_Rect Menurect = { 0, 720, 1200, 180 };
-         SDL_RenderFillRect(renderer, &Menurect)'
+         SDL_RenderFillRect(renderer, &Menurect);
          SDL_Rect lvlRect={50,720+50,300,80};
          SDL_RenderCopy(renderer,lvlTexture,NULL,&lvlRect);
 
@@ -262,7 +269,7 @@ void Game::draw(SDL_Renderer* renderer) {
   {
 
 
-        gameOverSurface = TTF_RenderText_Solid(gameFont,
+        gameOverSurface = TTF_RenderText_Solid(gameOFont,
         "Game Over", {255, 0, 0});
            gameOverTexture = SDL_CreateTextureFromSurface(renderer, gameOverSurface);
          int GOtextWidth, GOtextHeight;

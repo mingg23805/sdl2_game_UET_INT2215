@@ -26,11 +26,13 @@ Level::Level(SDL_Renderer* renderer, int setTileCountX, int setTileCountY) :
     setTileType(0,tileCountY-1,Type::spawner);
     setTileType(tileCountX-1,tileCountY-1,Type::spawner);
 
-
     calculateFlowField();
 }
 
-
+bool Level::isMainTower(int x,int y)
+{
+    return (x==targetX && y==targetY);
+}
 
 void Level::draw(SDL_Renderer* renderer, int tileSize) {
 
@@ -46,15 +48,6 @@ void Level::draw(SDL_Renderer* renderer, int tileSize) {
 
 
 
-   for (int y = 0; y < tileCountY; y++) {
-        for (int x = 0; x < tileCountX; x++) {
-            if (getTileType(x,y)== Type::spawner) {
-                SDL_Rect rect = { x * tileSize, y * tileSize, tileSize, tileSize };
-                SDL_RenderCopy(renderer, textureTileSpawner, NULL, &rect);
-            }
-
-        }
-    }
 
     if (textureTileTarget != nullptr) {
         SDL_Rect rect = { targetX * tileSize, targetY * tileSize, tileSize, tileSize };
@@ -67,7 +60,10 @@ void Level::draw(SDL_Renderer* renderer, int tileSize) {
                 SDL_Rect rect = { x * tileSize, y * tileSize, tileSize, tileSize };
                 SDL_RenderCopy(renderer, textureTileWall, NULL, &rect);
             }
-
+                 if (getTileType(x,y)== Type::spawner) {
+                SDL_Rect rect = { x * tileSize, y * tileSize, tileSize, tileSize };
+                SDL_RenderCopy(renderer, textureTileSpawner, NULL, &rect);
+            }
         }
     }
 }

@@ -7,7 +7,7 @@
 #include"turret.h"
 #include"projectile.h"
 //#include"MixerLoader.h"
-#include<SDL_ttf.h>
+#include"FontLoader.h"
 class Game
 {
 private:
@@ -17,7 +17,7 @@ private:
 	} placementModeCurrent;
 
 
-     TTF_Font* gameFont=nullptr;
+     TTF_Font* gameOFont=nullptr;
 
      SDL_Surface* gameOverSurface=nullptr;
      SDL_Texture* gameOverTexture=nullptr;
@@ -37,6 +37,7 @@ public:
 	~Game();
      int mainTowerHp=20;
      int point=0;
+     int maxBlockcanBuild=4;
 
 private:
 	void processEvents(SDL_Renderer* renderer, bool& running);

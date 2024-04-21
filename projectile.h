@@ -16,6 +16,8 @@ class Projectile
     bool getCollison();
 private:
     void checkCollision(std::vector<std::shared_ptr<Unit>>& listUnits);
+
+    int getCriticalDMG(int critRate);
     Vector2D pos, directionNormal;
      static const float speed,size,distanceTravelMax;
      float distanceTraveled=0;

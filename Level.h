@@ -14,7 +14,7 @@ private:
     enum class Type : int {
     block,
     wall,
-    spawner
+    spawner,
     };
 private:
 
@@ -38,6 +38,7 @@ public:
 	Type getTileType(int x, int y);
 	void setTileType(int x,int y,Type TileType);
 	Vector2D getRanSpawnerLocation();
+	bool isMainTower(int x,int y);
 
 private:
 	void drawTile(SDL_Renderer* renderer, int x, int y, int tileSize);
