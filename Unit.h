@@ -3,9 +3,10 @@
 #include <SDL.h>
 #include "Vector2D.h"
 #include "Level.h"
-//#include "TextureLoader.h"
+#include "TextureLoader.h"
 #include <memory>
 #include"timer.h"
+#include"HealthBar.h"
 class Game;
 
 
@@ -26,8 +27,10 @@ public:
         this->maxHp=2+lv;
         this->speed= 0.8f+ (float)(lv) * (0.5f);
         this->currentHp=maxHp;
-    }
+        hpBar.maxHP=maxHp;
+        hpBar.currentHP=maxHp;
 
+    }
 private:
 
 
@@ -38,4 +41,6 @@ private:
      float speed;
 	static const float size;
 	SDL_Texture* texture = nullptr;
+	 HealthBar hpBar;
+
 };

@@ -15,7 +15,7 @@ int main(int argc, char* args[]) {
 	}
 	else {
 
-        if (  Mix_OpenAudio(44100, AUDIO_S16SYS, 2,2048) < 0) {
+        if (  Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2,2048) < 0) {
         std::cerr << "SDL_Mixer could not initialize! SDL_Mixer Error: " << Mix_GetError() << std::endl;
        SDL_Quit();
        return -1;
@@ -25,8 +25,11 @@ int main(int argc, char* args[]) {
         SDL_Quit();
         return 1;
     }
+
 		SDL_Window* window = SDL_CreateWindow("Tower Base Defense",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,1200, 900, 0);
+		//	Mix_Music* music = Mix_LoadMUS("Data/Sounds/music.mp3");
+
 		if (window == nullptr) {
 			std::cout << "Error: Couldn't create window = " << SDL_GetError() << std::endl;
 			return 1;
@@ -35,6 +38,7 @@ int main(int argc, char* args[]) {
 
 			SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED |
 				SDL_RENDERER_PRESENTVSYNC);
+
 			if (renderer == nullptr) {
 				std::cout << "Error: Couldn't create renderer = " << SDL_GetError() << std::endl;
 				return 1;
@@ -50,6 +54,7 @@ int main(int argc, char* args[]) {
                  , playWindowHeight = 720;
 
 
+//                 Mix_PlayMusic(music, -1) ;
 				Game game(window, renderer, playWindowWidth, playWindowHeight);
 
 
@@ -61,8 +66,8 @@ int main(int argc, char* args[]) {
 
 		}
 
-
-      Mix_CloseAudio();
+        //Mix_FreeMusic(music);
+       Mix_CloseAudio();
 		TTF_Quit();
 		SDL_Quit();
 	}

@@ -18,6 +18,7 @@ private:
 
 
      TTF_Font* gameOFont=nullptr;
+     TTF_Font* gameFont=nullptr;
 
      SDL_Surface* gameOverSurface=nullptr;
      SDL_Texture* gameOverTexture=nullptr;
@@ -69,6 +70,7 @@ private:
 
 	SDL_Texture* textureOverlay = nullptr;
 	bool overlayVisible = true;
+//	Mix_Music*music= Mix_LoadMUS("Data/Sounds/music.mp3");
 
 
 

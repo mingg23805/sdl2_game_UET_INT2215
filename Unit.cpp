@@ -9,8 +9,10 @@ const float Unit::size = 0.48f;
 
 
 Unit::Unit(SDL_Renderer* renderer, Vector2D setPos) :
-	pos(setPos),timeJustHurt(0.25)  {
+	pos(setPos),timeJustHurt(0.25),	 hpBar(renderer, 48, 6) //tilesize=48
+{
 	texture = TextureLoader::loadTexture(renderer, "Unit.bmp");
+
 }
 bool Unit::checkALive()
 {
@@ -83,6 +85,11 @@ void Unit::draw(SDL_Renderer* renderer, int tileSize) {
 	 else
         SDL_SetTextureColorMod(texture,255,255,255);
 	if (renderer != nullptr) {
+		hpBar.setHP(currentHp ,
+              (int)((pos.x - size / 2) * tileSize)+1,
+			  (int)((pos.y - size / 2) * tileSize)+1);
+
+
 		int w,h;
 		SDL_QueryTexture(texture,NULL,NULL,&w,&h);
 
@@ -91,7 +98,9 @@ void Unit::draw(SDL_Renderer* renderer, int tileSize) {
 			(int)((pos.y - size / 2) * tileSize),
 			 w,
 			 h };
-		SDL_RenderCopy(renderer, texture, NULL, &rect);
+			 SDL_RenderCopy(renderer, texture, NULL, &rect);
+			 hpBar.render();
+
 	}
 }
 

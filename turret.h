@@ -8,7 +8,6 @@
 #include"timer.h"
 #include"MixerLoader.h"
 
-
 class Turret
 { private:
     Vector2D pos;

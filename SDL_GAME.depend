@@ -49,7 +49,7 @@
 1712588547 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\enemy.h
 	"game.h"
 
-1713715974 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
+1713800142 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
 	<bits/stdc++.h>
 	<SDL.h>
 	"Unit.h"
@@ -65,7 +65,7 @@
 	<SDL.h>
 	<SDL_image.h>
 
-1713716155 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
+1713799767 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
 	"Game.h"
 
 1713715923 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
@@ -108,13 +108,15 @@
 
 1712647081 source:d:\test\gamee\main.c
 
-1713548861 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.h
+1713796042 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.h
 	<vector>
 	<SDL.h>
 	"Vector2D.h"
 	"Level.h"
+	"TextureLoader.h"
 	<memory>
 	"timer.h"
+	"HealthBar.h"
 
 1678099102 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\vector2d.h
 	<cmath>
@@ -138,7 +140,7 @@
 1712668462 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\textureloader.cpp
 	"TextureLoader.h"
 
-1713548570 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.cpp
+1713797332 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.cpp
 	"Unit.h"
 	"Game.h"
 
@@ -151,10 +153,10 @@
 1712767865 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\timer.cpp
 	"timer.h"
 
-1713715923 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.cpp
+1713794920 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.cpp
 	"turret.h"
 
-1713715960 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.h
+1713795696 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\turret.h
 	<SDL.h>
 	<memory>
 	"TextureLoader.h"
@@ -191,4 +193,10 @@
 	<SDL_ttf.h>
 	<unordered_map>
 	<string>
+
+1713796531 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\healthbar.h
+	<SDL.h>
+
+1713796903 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\healthbar.cpp
+	"HealthBar.h"
 

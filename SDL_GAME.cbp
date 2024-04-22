@@ -35,6 +35,8 @@
 		<Unit filename="FontLoader.h" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.h" />
+		<Unit filename="HealthBar.cpp" />
+		<Unit filename="HealthBar.h" />
 		<Unit filename="Level.cpp" />
 		<Unit filename="Level.h" />
 		<Unit filename="MixerLoader.cpp" />
