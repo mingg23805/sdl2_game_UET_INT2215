@@ -49,7 +49,7 @@
 1712588547 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\enemy.h
 	"game.h"
 
-1713800142 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
+1713855887 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.h
 	<bits/stdc++.h>
 	<SDL.h>
 	"Unit.h"
@@ -59,16 +59,17 @@
 	"projectile.h"
 	"MixerLoader.h"
 	"FontLoader.h"
+	"HealthBar.h"
 
 1711615041 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\sdl_u.h
 	<bits/stdc++.h>
 	<SDL.h>
 	<SDL_image.h>
 
-1713799767 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
+1713856638 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\game.cpp
 	"Game.h"
 
-1713715923 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
+1713800486 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\main.cpp
 	<iostream>
 	<SDL.h>
 	"Game.h"
@@ -140,7 +141,7 @@
 1712668462 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\textureloader.cpp
 	"TextureLoader.h"
 
-1713797332 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.cpp
+1713855929 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\unit.cpp
 	"Unit.h"
 	"Game.h"
 
@@ -197,6 +198,6 @@
 1713796531 c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\healthbar.h
 	<SDL.h>
 
-1713796903 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\healthbar.cpp
+1713843816 source:c:\users\minh\onedrive\desktop\sdl2_game_uet_int2215\healthbar.cpp
 	"HealthBar.h"
 

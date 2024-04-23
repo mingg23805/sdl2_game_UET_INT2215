@@ -20,7 +20,7 @@ void HealthBar::render() {
 
 void HealthBar::setHP(int currentHP ,int x, int y) {
     currentHP = currentHP;
-    outerRect = { x, y, maxWidth, height };
+    outerRect = { x-1, y-1, maxWidth+2, height+2 };
     innerRect = { x, y,(int)((float)(currentHP) / maxHP * maxWidth) , height };
 
 }

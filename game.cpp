@@ -5,20 +5,21 @@
 Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight) :
     placementModeCurrent(PlacementMode::wall),
     level(renderer, windowWidth / tileSize, windowHeight / tileSize) ,
+    mainHpBar(renderer,tileSize*9,tileSize/2),
     spawnT(0.25f),roundT(5.0f)
     {
 
     if (window != nullptr && renderer != nullptr) {
 
-        textureOverlay = TextureLoader::loadTexture(renderer, "Overlay.bmp");
+
+          std::ifstream readFile("highestPoint.txt");
+          mainHpBar.maxHP=mainTowerHp;
+
         mix_chunkSpawnUnit= SoundLoader::loadSound("Data/Sounds/spawn.ogg");
         gameOFont = FontLoader::loadFont("Warriatron3DStraight-OGGvp.otf",200);
+         gameFont=FontLoader::loadFont("arial.ttf",65);
 
-
-
-
-
-
+         readFile >> highestPoint;
 
 
 
@@ -47,13 +48,16 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
 
             }
         }
+        std::ofstream writeFile("highestPoint.txt", std::ios::out | std::ios::trunc);
+       if (writeFile.is_open()) {
+        writeFile << highestPoint;
+        writeFile.close();}
     }
 }
 
 
 Game::~Game() {
     TextureLoader::deallocateTextures();
-   // lv=0;
    SoundLoader::deallocateSounds();
   FontLoader::deallocateFonts();
 }
@@ -119,7 +123,8 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
             case PlacementMode::wall:
                 if(mouseDownThisFrame&& maxBlockcanBuild>0 &&
                    level.isTileWall((int)posMouse.x, (int)posMouse.y )==false
-                   &&level.isMainTower( (int)posMouse.x, (int)posMouse.y )==false)
+                   &&level.isMainTower( (int)posMouse.x, (int)posMouse.y )==false
+                    )
                    {
                        level.setTileWall((int)posMouse.x, (int)posMouse.y, true);
 
@@ -150,14 +155,16 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
 
 void Game::update(float dT,SDL_Renderer *renderer) {
 
-     updateUnits(dT);
+        updateUnits(dT);
     for(auto&selectedTurret : listTurrets)
       selectedTurret.update(dT,listUnits,renderer,listProjectiles );
 
 
-   updateProjectiles(dT);
+       updateProjectiles(dT);
+       highestPoint=std::max(highestPoint,point);
 
       updateSpawnUnits(renderer,dT);
+
 
 }
 void Game::updateSpawnUnits(SDL_Renderer *renderer,float dT)
@@ -229,41 +236,55 @@ void Game::updateProjectiles(float dT)
 void Game::draw(SDL_Renderer* renderer) {
       SDL_RenderClear(renderer);
 
+SDL_SetRenderDrawColor(renderer,255, 255, 255, 255);
 
 
-
-
-
-       SDL_SetRenderDrawColor(renderer,255, 255, 255, 255);
         SDL_Rect Menurect = { 0, 720, 1200, 180 };
          SDL_RenderFillRect(renderer, &Menurect);
-         SDL_Rect lvlRect={50,720+50,300,80};
-         SDL_RenderCopy(renderer,lvlTexture,NULL,&lvlRect);
+
+          level.draw(renderer, tileSize);
 
 
 
+        std::string lvlText = "Level: " + std::to_string(lv);
+        lvlSurface=   TTF_RenderText_Solid(gameFont,
+                                           lvlText.c_str(), {0, 0, 0});
+        lvlTexture=SDL_CreateTextureFromSurface(renderer,lvlSurface);
+        SDL_Rect lvlRect={50,720+50,300,80};
+        SDL_FreeSurface(lvlSurface);
+        SDL_RenderCopy(renderer, lvlTexture,nullptr, &lvlRect );
 
-    level.draw(renderer, tileSize);
+        std::string pointText = "Score: " + std::to_string(point);
+        pointSurface=   TTF_RenderText_Solid(gameFont,
+                                             pointText.c_str(), {0, 0, 0});
+        pointTexture=SDL_CreateTextureFromSurface(renderer,pointSurface);
+        pointRect={400,720+50,300,80 } ;
+        SDL_FreeSurface(pointSurface);
+        SDL_RenderCopy(renderer, pointTexture,nullptr, &pointRect);
+
+
+         std::string hpointText = "Highest : " + std::to_string(highestPoint);
+        highestPointSurface=   TTF_RenderText_Solid(gameFont,
+                                                hpointText.c_str(), {0, 0, 0});
+        highestPointTexture=SDL_CreateTextureFromSurface(renderer,highestPointSurface);
+        highestPointRect={750,720+50,300,80 } ;
+        SDL_FreeSurface(highestPointSurface);
+        SDL_RenderCopy(renderer, highestPointTexture,nullptr, &highestPointRect);
+
+       mainHpBar.setHP(mainTowerHp,
+                       (int)((25-9)/2)*tileSize,
+                       0);
+         mainHpBar.render();
 
     for (auto& unitSelected : listUnits)
         if(unitSelected != nullptr)unitSelected->draw(renderer, tileSize);
 
-
-
     for (auto& selectedTurret : listTurrets)
         selectedTurret.draw(renderer, tileSize);
 
-        for(auto&selectedProjectile : listProjectiles)
-     selectedProjectile.draw(renderer,tileSize);
+    for(auto&selectedProjectile : listProjectiles)
+        selectedProjectile.draw(renderer,tileSize);
 
-
-
-    if (textureOverlay != nullptr && overlayVisible) {
-        int w = 0, h = 0;
-        SDL_QueryTexture(textureOverlay, NULL, NULL, &w, &h);
-        SDL_Rect rect = { 40, 40, w, h };
-        SDL_RenderCopy(renderer, textureOverlay, NULL, &rect);
-    }
 
           if(isGameOver()==true)
   {

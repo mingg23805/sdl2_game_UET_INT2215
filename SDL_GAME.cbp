@@ -47,6 +47,7 @@
 		<Unit filename="Unit.h" />
 		<Unit filename="Vector2D.cpp" />
 		<Unit filename="Vector2D.h" />
+		<Unit filename="highestPoint.txt" />
 		<Unit filename="main.cpp" />
 		<Unit filename="menu.cpp" />
 		<Unit filename="menu.h" />

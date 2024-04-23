@@ -99,6 +99,7 @@ void Unit::draw(SDL_Renderer* renderer, int tileSize) {
 			 w,
 			 h };
 			 SDL_RenderCopy(renderer, texture, NULL, &rect);
+
 			 hpBar.render();
 
 	}

@@ -8,6 +8,12 @@
 #include"projectile.h"
 #include"MixerLoader.h"
 #include"FontLoader.h"
+#include"HealthBar.h"
+
+
+
+
+
 class Game
 {
 private:
@@ -20,17 +26,23 @@ private:
      TTF_Font* gameOFont=nullptr;
      TTF_Font* gameFont=nullptr;
 
-     SDL_Surface* gameOverSurface=nullptr;
-     SDL_Texture* gameOverTexture=nullptr;
-     SDL_Rect gameOverRect={0,0,0,0};
+    SDL_Surface* gameOverSurface=nullptr;
+    SDL_Texture* gameOverTexture=nullptr;
+    SDL_Rect gameOverRect={0,0,0,0};
 
-      SDL_Surface* pointSurface=nullptr;
-     SDL_Texture* pointTexture=nullptr;
-     SDL_Rect pointRect={0,0,0,0};
+    SDL_Surface* pointSurface=nullptr;
+    SDL_Texture* pointTexture=nullptr;
+    SDL_Rect pointRect={0,0,0,0};
 
-      SDL_Surface* lvlSurface=nullptr;
-     SDL_Texture* lvlTexture=nullptr;
-     SDL_Rect lvlRect={0,0,0,0};
+    SDL_Surface* lvlSurface=nullptr;
+    SDL_Texture* lvlTexture=nullptr;
+    SDL_Rect lvlRect={0,0,0,0};
+
+
+    SDL_Surface*  highestPointSurface=nullptr;
+    SDL_Texture*  highestPointTexture=nullptr;
+    SDL_Rect      highestPointRect={0,0,0,0 } ;
+
 
     Mix_Chunk* mix_chunkSpawnUnit=nullptr;
 public:
@@ -38,6 +50,7 @@ public:
 	~Game();
      int mainTowerHp=20;
      int point=0;
+     int highestPoint;
      int maxBlockcanBuild=4;
 
 private:
@@ -67,10 +80,9 @@ private:
 
     int unitCount;
     int lv=0;
-
-	SDL_Texture* textureOverlay = nullptr;
 	bool overlayVisible = true;
 //	Mix_Music*music= Mix_LoadMUS("Data/Sounds/music.mp3");
+   HealthBar mainHpBar;
 
 
 
