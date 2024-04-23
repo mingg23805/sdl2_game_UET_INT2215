@@ -15,6 +15,7 @@ private:
     block,
     wall,
     spawner,
+    cantbuilt
     };
 private:
 
@@ -39,6 +40,7 @@ public:
 	void setTileType(int x,int y,Type TileType);
 	Vector2D getRanSpawnerLocation();
 	bool isMainTower(int x,int y);
+	bool tileCantBuilt(int x,int y);
 
 private:
 	void calculateFlowField();

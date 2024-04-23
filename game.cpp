@@ -18,7 +18,7 @@ Game::Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int wind
         mix_chunkSpawnUnit= SoundLoader::loadSound("Data/Sounds/spawn.ogg");
         gameOFont = FontLoader::loadFont("Warriatron3DStraight-OGGvp.otf",200);
          gameFont=FontLoader::loadFont("arial.ttf",65);
-
+          turtext=TextureLoader::loadTexture(renderer,"Tile Wall.bmp");
          readFile >> highestPoint;
 
 
@@ -100,11 +100,6 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
             case SDL_SCANCODE_2:
                 placementModeCurrent = PlacementMode::turret;
                 break;
-
-
-            case SDL_SCANCODE_H:
-                overlayVisible = !overlayVisible;
-                break;
             }
         }
     }
@@ -124,6 +119,7 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
                 if(mouseDownThisFrame&& maxBlockcanBuild>0 &&
                    level.isTileWall((int)posMouse.x, (int)posMouse.y )==false
                    &&level.isMainTower( (int)posMouse.x, (int)posMouse.y )==false
+                   &&level.tileCantBuilt( (int)posMouse.x, (int)posMouse.y)==false
                     )
                    {
                        level.setTileWall((int)posMouse.x, (int)posMouse.y, true);
@@ -142,9 +138,12 @@ void Game::processEvents(SDL_Renderer* renderer, bool& running) {
 
 
         case SDL_BUTTON_RIGHT:
-
-            level.setTileWall((int)posMouse.x, (int)posMouse.y, false);
-
+                 if(isTurretAt(posMouse.x,posMouse.y))
+                removeTurretsAtMousePosition(posMouse);
+               if(level.isTileWall((int)posMouse.x, (int)posMouse.y)==true)
+           {
+               level.setTileWall((int)posMouse.x, (int)posMouse.y, false);
+               maxBlockcanBuild++;}
 
             break;
         }
@@ -271,6 +270,18 @@ SDL_SetRenderDrawColor(renderer,255, 255, 255, 255);
         SDL_FreeSurface(highestPointSurface);
         SDL_RenderCopy(renderer, highestPointTexture,nullptr, &highestPointRect);
 
+          std::string numTurretMax =  ": "+std::to_string(maxBlockcanBuild);
+         numCanBuiltSurface=   TTF_RenderText_Solid(gameFont,
+                                           numTurretMax.c_str(), {0, 0, 0});
+        numCanBuiltTexture=SDL_CreateTextureFromSurface(renderer, numCanBuiltSurface);
+        numCanBuiltRect={1150,720+50,50,80};
+        SDL_FreeSurface( numCanBuiltSurface);
+        SDL_RenderCopy(renderer, numCanBuiltTexture, nullptr, &numCanBuiltRect );
+
+
+         turRect={1080,720+50,50,80};
+
+          SDL_RenderCopy(renderer, turtext, nullptr, &turRect );
        mainHpBar.setHP(mainTowerHp,
                        (int)((25-9)/2)*tileSize,
                        0);

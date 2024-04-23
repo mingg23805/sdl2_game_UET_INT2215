@@ -44,6 +44,15 @@ private:
     SDL_Rect      highestPointRect={0,0,0,0 } ;
 
 
+
+
+    SDL_Surface*  numCanBuiltSurface=nullptr;
+    SDL_Texture*  numCanBuiltTexture=nullptr;
+    SDL_Rect      numCanBuiltRect={0,0,0,0 } ;
+
+    SDL_Texture* turtext=nullptr;
+    SDL_Rect      turRect={0,0,0,0 } ;
+
     Mix_Chunk* mix_chunkSpawnUnit=nullptr;
 public:
 	Game(SDL_Window* window, SDL_Renderer* renderer, int windowWidth, int windowHeight);

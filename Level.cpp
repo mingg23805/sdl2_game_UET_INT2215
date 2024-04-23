@@ -12,10 +12,31 @@ Level::Level(SDL_Renderer* renderer, int setTileCountX, int setTileCountY) :
     size_t listTilesSize = (size_t)tileCountX * tileCountY;
     listTiles.assign(listTilesSize, Tile{});
 
+
+   for (int x = 1; x < tileCountX-1; x++)
+     {
+         setTileType(x,0,Type::cantbuilt);
+         setTileType(x,tileCountY-1,Type::cantbuilt);
+     }
+
+   for (int y = 1; y < tileCountY-1; y++)
+     {
+         setTileType(0,y,Type::cantbuilt);
+         setTileType(tileCountX-1,y,Type::cantbuilt);
+     }
+      setTileType(1,1,Type::cantbuilt);
+      setTileType(tileCountX-2,1,Type::cantbuilt);
+      setTileType(1,tileCountY-2,Type::cantbuilt);
+      setTileType(tileCountX-2,tileCountY-2,Type::cantbuilt);
+   for (int y = -1; y <= 1; y++) {
+        for (int x =-1 ; x <= 1; x++)
+            setTileType(targetX+x,targetY+y,Type::cantbuilt);}
+
     setTileType(tileCountX-1,0,Type::spawner);
     setTileType(0,0,Type::spawner);
     setTileType(0,tileCountY-1,Type::spawner);
     setTileType(tileCountX-1,tileCountY-1,Type::spawner);
+
 
     calculateFlowField();
 }
@@ -110,6 +131,10 @@ void Level::setTileType(int x,int y,Type TileType)
         listTiles[index].type= TileType;
    calculateFlowField();
 
+}
+bool Level::tileCantBuilt(int x,int y)
+{
+    return getTileType(x,y)==Type::cantbuilt;
 }
 Vector2D Level::getTargetPos() {
     return Vector2D( (float)targetX+ 0.5f, (float)targetY + 0.5f);
