@@ -1,9 +1,9 @@
 # **Tower Defense**
-## **VIDEO DEMO** : [Drive link](https://drive.google.com/file/d/1OFSKsEE1SBk7E3eio2TZ0CTekAB1_QS4/view?usp=drive_link)
+## **Video demo** : [Drive link](https://drive.google.com/file/d/1OFSKsEE1SBk7E3eio2TZ0CTekAB1_QS4/view?usp=drive_link)
 ## **Table of Content**
 -   [**Tower Defense**](#tower-defense)
-    - [**VIDEO DEMO**](#video-demo)    
-    - [**Table of contents**](#table-of-contents)
+    - [**Video Demo**](#video-demo)    
+    - [**Table of Contents**](#table-of-contents)
     - [**Giới thiệu Game**](#giới-thiệu-game)
     - [**Cách tải game**](#cách-tải-game)
     - [**Hướng dẫn chơi**](#hướng-dẫn-chơi)
