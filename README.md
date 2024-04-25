@@ -1,6 +1,6 @@
 # **Tower Defense**
-## VIDEO DEMO : [Drive link](https://drive.google.com/file/d/1OFSKsEE1SBk7E3eio2TZ0CTekAB1_QS4/view?usp=drive_link)
-## Table of Content
+## **VIDEO DEMO** : [Drive link](https://drive.google.com/file/d/1OFSKsEE1SBk7E3eio2TZ0CTekAB1_QS4/view?usp=drive_link)
+## **Table of Content**
 -   [**Tower Defense**](#tower-defense)
     - [**VIDEO DEMO**](#video-demo)    
     - [**Table of contents**](#table-of-contents)
