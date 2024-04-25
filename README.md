@@ -16,8 +16,8 @@
 nhất có thể cho đến khi thua cuộc .
 
 ## **Cách tải Game**
-1. Nếu có 
-2. giải nén và chạy theo file exe
+1. Nếu có codeblocks thì git clone project về ( chạy bằng code blocks)
+2. giải nén và chạy theo file exe theo tệp [zip](https://github.com/mingg23805/sdl2_game_UET_INT2215/blob/main/Data/Images/Tile%20Wall.bmp)
 
 ## **Hướng dẫn chơi**
 1. Khi bắt đầu game hoặc khi đánh xong quái của level đó, bạn có 5 giây để đợi quái ra .
