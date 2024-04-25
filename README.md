@@ -22,10 +22,10 @@ nhất có thể cho đến khi thua cuộc .
 ## **Hướng dẫn chơi**
 1. Khi bắt đầu game hoặc khi đánh xong quái của level đó, bạn có 5 giây để đợi quái ra .
 2. Cách thao tác trong game 
- - Bấm phím 1 để chuyển chế độ xây tường .
- - Bấm phím 2 để chuyển sang chế độ xây trụ
+ - Bấm phím 1 để chuyển chế độ xây tường    <img src= https://github.com/mingg23805/sdl2_game_UET_INT2215/blob/main/Data/Images/Tile%20Wall.bmp>
+ - Bấm phím 2 để chuyển sang chế độ xây trụ  <img src=https://github.com/mingg23805/sdl2_game_UET_INT2215/blob/main/Data/Images/Turret%20Under.bmp>
  - Bấm chuột trái để xây tường hoặc trụ tùy theo bạn đang ở chế độ nào
- - Bấm chuột phải để xóa bỏ tường và trụ ở vị trí đó .
+ - Bấm chuột phải để xóa bỏ tường và trụ ở vị trí đó 
 
 ## **Kỹ thuật lập trình**
 ### ***Phát triển trên nền tảng:***
